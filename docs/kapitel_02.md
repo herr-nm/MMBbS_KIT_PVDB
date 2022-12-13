@@ -144,3 +144,78 @@ Beantworten Sie die folgenden Fragen:
 
 ---
 
+// TODO Informationsmaterial M|2.3: Relationale Datenbanken - Übersicht
+
+---
+
+## Informationsmaterial M|2.4: Grundregeln von Datenbanken
+
+### Keine Redundanzen
+
+Ein Vorteil und eine weitere Voraussetzung für eine relationale Datenbank ist, dass keine Datenredundanzen auftreten dürfen: Es werden keine Daten mehrfach gespeichert. In dem obigen Beispiel werden daher in der Tabelle Artikelbezug keine Adressen der Lieferer gespeichert, sondern lediglich per Lieferer-Nr. auf die Stammdatenliste verwiesen.
+
+### Eindeutigkeit von Datensätzen durch Schlüsselattribute
+
+Damit es nicht zu Fehlern oder Verwechslungen in der Tabelle kommt, erhält jeder Datensatz einen Primärschlüssel. Durch die Vergabe eines Primärschlüssels ist jeder Datensatz eindeutig identifizierbar. Ein Schlüssel darf sich nie ändern. In der vorigen Tabelle dient die Lieferer-Nr. als Primärschlüssel der Datensätze für die Tabelle Hauptlieferer.
+
+Falls die Primärschlüssel der Lieferanten nachträglich verändert werden, könnten die Datensätze aus der Tabelle "Hauptlieferer" nicht mehr den Datensätzen der Tabelle "Artikelbezug" zugeordnet werden. Die Folge wäre eine "Inkonsistenz" in der Datenbank.
+
+### Keine Prozessdaten
+
+Eine Tabelle darf nur Grunddaten enthalten (Entitäten). Daten, die sich aus Grunddaten zusammensetzen oder errechnen lassen, müssen vermieden werden, damit es nicht zu Widersprüchen kommen kann.
+
+Beispiel: Das Alter einer Person darf nicht in einer Datenbank aufgenommen werden, da dieses sich ständig ändert. Stattdessen wird das Geburtsdatum erfasst, da mit diesem stets das aktuelle Alter errechnet werden kann.
+
+---
+
+## Handlungssituation
+
+Die Datenhaltung in dem herkömmlichen Dateisystem mithilfe von Tabellenkalkulationen haben gegenüber einer Datenbank verschiedene Nachteile und bringen oftmals Probleme mit sich. Da Matthias Thale sich nun mit der Sicherung der Daten beschäftigt hat, fallen Ihm einige Probleme auf, die mit der bisherigen Datenhaltung aufkommen.
+
+Bei der Analyse der Situation und der Auseinandersetzung mit dem Speichern von Daten können verschiedene Probleme identifiziert werden. Mit diesen sollen Sie sich nun auseinandersetzen. Außerdem ist Matthias Thale der genaue Ablauf zur Erstellung und Wartung einer Datenbank unbekannt, weshalb eine Darstellung erarbeitet werden soll.
+
+![Glühbirne](bilder/kap_02_handlungssit_gluehbirne.jpg)
+
+---
+
+## Arbeitsauftrag A|2.5: Datenbank-Lebenszyklus
+
+Erstellen Sie ein Schaubild zum Datenbank-Lebenszyklus, damit dieses für Matthias Thale einen groben Ablaufplan abbildet. Nutzen Sie hierfür das Informationsmaterial im Kurs.
+
+---
+
+## Informationsmaterial M|2.5: Datenbank-Lebenszyklus
+
+Bei der Entwicklung und dem Einsatz von Software werden die verschiedenen Phasen wie z.B. Analyse, Planung, Entwicklung, Test und Anwendung von Software unterschieden und unter dem Begriff des Software-Lebenszyklus zusammengefasst. Diese Einteilung in Entwicklungsphasen kann ebenfalls auf dem Gebiet der Datenbanken angewendet werden.
+
+Die Analyse der Anforderungen grenzt die Inhalte der neuen Datenbank ein und dient der Festlegung der Benutzergruppen und Anwendungen. Dabei werden die Datenobjekte, deren Eigenschaften und Beziehungen sowie mögliche Vorgänge (Aktualisierungen, Abfragen) und Randbedingungen ermittelt. Das Resultat der Anforderungsanalyse ist die Anforderungsspezifikation.
+
+Der konzeptionelle Entwurf umfasst die Modellierung der Sichten und die Integration der Sichten in ein Gesamtschema. Dafür werden meist Entity-Relationship-Diagramme erstellt. Auf diesem Gebiet werden aber auch UML-Diagramme eingesetzt (UML = Unified Modeling Language).
+
+Diese grafischen Darstellungen werden in der Phase des logischen Entwurfs in das Datenmodell des Ziel DBS (z,B. in das relationale Datenmodell) transformiert und die gesamte Datenbank wird so aufbereitet, dass eine effektive Speicherung möglich ist (das Datenbankschema wird normalisiert).
+
+Bei verteilten Datenbanken ist ein Entwurf für die Verteilung der Datenbanken im Netz erforderlich.
+
+Nun kann die Datenbank mithilfe der Sprachmittel des DBMS erstellt und die benötigten Anfragen können formuliert werden, was als physischer Entwurf bzw. Implementierung bezeichnet wird. Für relationale DBS geschieht dies in der Abfragesprache SQL. Im Falle einer Übernahme von Daten aus alten Datenbanken oder Dateiinhalten erfolgt an dieser Stelle eine Konvertierung dieser Daten in das neue Format.
+
+Die Datenbank und die erstellten Abfragen werden nun getestet und die Ergebnisse werden auf ihre Gültigkeit bezüglich der Anforderungen geprüft (validiert). So wir die Sicherung der Datenbank-Qualität gewährleistet.
+
+In der Phase der Anwendung muss die Datenbank ständig gewartet werden. Im Laufe dieser Zeit können sich Änderungen des Datenbankschemas ergeben. In diesem Fall ist eine Reorganisation der Datenbank notwendig.
+
+!!! note "Zusätzliches Material, weitere Übungen & Tipps"
+
+    Die folgenden Übungen und Tipps & Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br>*Ich kann, weil ich will, was ich muss! (Immanuel Kant)*
+
+## Übungen
+
+// TODO Links einfügen
+
+## Zusatzmaterial
+
+// TODO Links einfügen
+
+{%
+   include-markdown "inhalte/lizenzhinweis.md"
+   start="<!--include-start-->"
+   end="<!--include-end-->"
+%}

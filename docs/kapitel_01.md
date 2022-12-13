@@ -17,3 +17,9 @@ Die BSE bedient verschiedene Geschäftsfelder: Einerseits werden IT-Systeme jede
 Andererseits bietet die BSE einen anfangs noch kleinen und mit der Zeit zunehmend größer werdenden Händler-Service an. Im Rahmen dessen wird eine Verkaufsmöglichkeit für neue und gebrauchte Hardware angeboten. In dieser nimmt die BSE eine Vermittlerrolle zwischen Verkäufer und Käufer im Sinne eines Treuhandservice ein.
 
 ![Office](bilder/kap_01_handlungssit_buero.jpg)
+
+{%
+   include-markdown "inhalte/lizenzhinweis.md"
+   start="<!--include-start-->"
+   end="<!--include-end-->"
+%}

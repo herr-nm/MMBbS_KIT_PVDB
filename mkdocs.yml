@@ -28,3 +28,4 @@ nav:
     - Informationen zum Kurs: 'index.md'
     - Kapitel 01 - Modellunternehmen: 'kapitel_01.md'
     - Kapitel 02 - Grundlagen Datenhaltung: 'kapitel_02.md'
+    - Kapitel 03 - Entwurf von Datenbanken & Normalisierung: 'kapitel_03.md'
