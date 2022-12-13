@@ -1,0 +1,30 @@
+site_name: KIT Prüfungsvorbereitung Datenbanken
+
+theme:
+  name: material
+  language: de
+  font: false
+  favicon: bilder/favicon.png
+  logo: bilder/logo.png
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+plugins:
+  - include-markdown
+
+extra_css:
+  - 'extra.css'
+
+use_directory_urls: false
+
+repo_url: https://github.com/herr-nm/MMBbS_KIT_PVDB
+
+site_url: https://herr-nm.github.io/MMBbS_KIT_PVDB
+
+nav:
+    - Informationen zum Kurs: 'index.md'
+    - Kapitel 00 - Organisatorisches: 'kapitel_00.md'
+    - Kapitel 01 - Modellunternehmen: 'kapitel_01.md'
