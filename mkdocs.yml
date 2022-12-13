@@ -26,5 +26,5 @@ site_url: https://herr-nm.github.io/MMBbS_KIT_PVDB
 
 nav:
     - Informationen zum Kurs: 'index.md'
-    - Kapitel 00 - Organisatorisches: 'kapitel_00.md'
     - Kapitel 01 - Modellunternehmen: 'kapitel_01.md'
+    - Kapitel 02 - Grundlagen Datenhaltung: 'kapitel_02.md'
