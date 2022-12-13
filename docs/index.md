@@ -1,6 +1,6 @@
-# KSM - LF13 - Netzwerkinfrastruktur planen und kalkulieren
+# KIT - Prüfungsvorbereitung Datenbanken
 
-**Willkommen im LF13-Kurs der Kaufleute für IT-System-Management an den MMBbS.**
+**Willkommen im PB-DB-Kurs der kaufmännischen IT-Berufe an den MMBbS.**
 
 <br>
 

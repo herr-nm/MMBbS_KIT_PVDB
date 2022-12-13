@@ -1,8 +1,10 @@
 # Kapitel 1: Vorstellung des Modellunternehmens
-	
+
+![Kapitelbild](bilder/kap_01_logo_bse.png)
+
 In diesem Kapitel ...
 
-... erfahren Sie mehr zu dem LF6-Modellunternehmen.
+... erfahren Sie mehr zu dem Modellunternehmen.
 
 ---
 
