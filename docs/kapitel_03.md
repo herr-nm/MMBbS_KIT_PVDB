@@ -338,7 +338,7 @@ tbl_lagerort(<u>lagerortPK</u>, bezeichnung, temperatur)
 
 ---
 
-## Situation
+## Kompetenz 3.2: Prozess der Normalisierung berücksichtigen
 
 Thilo Ostiem hat Matthias Thale bereits viel weitergeholfen, sodass erste ER-Diagramme entstanden sind. Zwischen den Recherchen zu Datenbanken fällt nun Matthias Thale ein Ausdruck des Außendienstes in die Hände. Hierauf wurden potenzielle Neukunden erfasst. Diese Daten möchte er nun so aufbereiten, dass sie in eine Datenbank eingetragen werden können.
 
