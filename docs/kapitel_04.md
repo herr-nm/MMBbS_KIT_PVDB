@@ -9,7 +9,7 @@ In diesem Kapitel ...
 
 ---
 
-## Situation
+## Kompetenz 4.0: Normalisierte Datenbanken planen
 
 Bis die Datenbank der BSE GmbH erstellt werden kann, müssen noch Informationen eingeholt werden. Dazu wurde eine Besprechung angesetzt. In der Zwischenzeit sollen für andere Kundenaufträge erste Datenbankvorlagen erstellt werden.
 
