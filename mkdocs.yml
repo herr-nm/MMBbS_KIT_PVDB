@@ -29,3 +29,4 @@ nav:
     - Kapitel 01 - Modellunternehmen: 'kapitel_01.md'
     - Kapitel 02 - Grundlagen Datenhaltung: 'kapitel_02.md'
     - Kapitel 03 - Entwurf von Datenbanken & Normalisierung: 'kapitel_03.md'
+    - Kapitel 04 - Entwurf vpn Datenbanken für MySQL: 'kapitel_04.md'
