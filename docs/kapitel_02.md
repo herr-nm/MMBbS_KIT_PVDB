@@ -11,7 +11,7 @@ In diesem Kapitel ...
 
 ---
 
-## Handlungssituation
+## Kompetenz 2.0: Grundlagen der objektorientierten Programmierung (OOP) analysieren
 
 Matthias Thale ist langjähriger Mitarbeiter der BSE. Nachdem er im technischen Marketing jahrelang für die Auswahl von Hardwarekomponenten zuständig war, hatte er die Idee der ursprünglichen Verkaufsplattform. Nachdem Herr Thale seit 5 Jahren alleine die in einer Tabellenkalkulation organisierte Plattform verwaltete, muss er sich nun ein Jahr vor seinem Ruhestand um einen Nachfolger kümmern.
 
@@ -83,7 +83,7 @@ Attribute haben unterschiedliche Sichtbarkeiten. Sie können privat oder öffent
 
 ---
 
-## Handlungssituation
+## Kompetenz 2.1: Grundlagen und Vorteile der Datenbanken erkennen
 
 Die Planung der zu programmierenden Anwendung wird über Objekte und damit abstrakter in Klassen in Form eines UML-Diagramms geplant. Die Funktionalität und die Datenhaltung werden in einer Klasse zwar vereint, aber der Fokus soll fürs Erste gemäß der Vereinbarung zwischen Matthias Thale und Thilo Ostiem auf die Daten gelegt werden.
 
@@ -168,7 +168,7 @@ Beispiel: Das Alter einer Person darf nicht in einer Datenbank aufgenommen werde
 
 ---
 
-## Handlungssituation
+## Kompetenz 2.2: Datenbank-Lebenszyklus berücksichtigen
 
 Die Datenhaltung in dem herkömmlichen Dateisystem mithilfe von Tabellenkalkulationen haben gegenüber einer Datenbank verschiedene Nachteile und bringen oftmals Probleme mit sich. Da Matthias Thale sich nun mit der Sicherung der Daten beschäftigt hat, fallen Ihm einige Probleme auf, die mit der bisherigen Datenhaltung aufkommen.
 

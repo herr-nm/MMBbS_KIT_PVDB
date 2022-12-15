@@ -12,7 +12,7 @@ In diesem Kapitel ...
 
 ---
 
-## Handlungssituation
+## Kompetenz 3.0: ER-Diagramme beschreiben
 
 Nachdem Matthias Thale nun mehr über Datenbanken weiß, möchte er diese erst einmal konzeptionell entwerfen, bevor er mit der Realisierung beginnt. Thilo Ostiem hat ihm dafür Material zusammen gesucht, anhand dessen die Modellierungstechnik erläutert werden soll. Die Methode der Modellierung, die sich durchgesetzt hat, ist das sogenannte Entity-Relationship-Modell (ERM). Damit Thilo Ostiem beginnen kann, müssen die einzelnen Elemente der Notation genauer betrachtet werden.
 
@@ -237,7 +237,7 @@ Bei einer Beziehungsentität wird ein neuer Primärschlüssel mit dem Namen der 
 
 ---
 
-## Handlungssituation
+## Kompetenz 3.1: ER-Diagramme erstellen
 
 Der Aufbau eines ERM ist nun bekannt, folgend soll ein näherer Blick auf die Beziehungstypen geworfen werden. Außerdem ist ein erstes ER-Diagramm zu erstellen.
 
@@ -337,6 +337,90 @@ tbl_lagerort(<u>lagerortPK</u>, bezeichnung, temperatur)
 - bei mehreren Worten ggf. mit Unterstrichen "_" teilen (z.B. `gehoert_zu`)
 
 ---
+
+## Situation
+
+Thilo Ostiem hat Matthias Thale bereits viel weitergeholfen, sodass erste ER-Diagramme entstanden sind. Zwischen den Recherchen zu Datenbanken fällt nun Matthias Thale ein Ausdruck des Außendienstes in die Hände. Hierauf wurden potenzielle Neukunden erfasst. Diese Daten möchte er nun so aufbereiten, dass sie in eine Datenbank eingetragen werden können.
+
+Dabei ist ihm klar: es dürfen keine Daten redundant eingetragen werden oder Widersprüche auftauchen. Er bekommt den Tipp von Thilo Ostiem, sich einmal das Themengebiet der "Normalisierung" anzusehen.
+
+![Monitor Icons](bilder/kap_03_handlungssit_icons.jpg)
+
+---
+
+### Arbeitsauftrag A|3.4: Tabellen beurteilen
+
+Beurteilen Sie die vorliegende Tabelle (s.u.). Welche Probleme könnten sich bei der Erfassung der vorliegenden Tabelle in einer Datenbank ergeben?
+
+Stellen Sie erste Verbesserungsvorschläge für die abgebildete Tabelle zusammen.
+
+![Tabelle](bilder/kap_03_a34.JPG)
+
+---
+
+### Arbeitsauftrag A|3.5: Prozess zur Normalisierung
+
+1. Erläutern Sie die Problematik in Datenbanken, wenn Redundanzen auftreten sollten. Nennen Sie Beispiele.
+2. Beschreiben Sie in eigenen Worten die Notwendigkeit der Normalisierung einer Tabelle.
+3. Zählen Sie in Stichpunkten die Kriterien auf, die notwendig für das Erreichen der ersten, der zweiten bzw. der dritten Normalform sind.
+
+---
+
+## Informationsmaterial M|3.5: Normalisierung einer Datenbank
+
+#### Redundanzen / Notwendigkeit einer Normalisierung
+
+Wie bereits bekannt, ist es eine Grundregel, Redundanzen in Datenbanken zu vermeiden. Gleiche Inhalte dürfen somit nicht in mehreren Datenfeldern vorkommen. Ein Datenfeld darf außerdem nur einen einzigen Eintrag enthalten.
+
+Beispiel: Statt dem Datenfeld "Name" werden die Felder "Vorname" und "Nachname" angelegt.
+
+Liegen "Verstöße" gegen diese Grundregel vor, müssen diese Daten in Normalform gebracht werden. Diesen Prozess nennt man auch Normalisierung.
+
+In der Regel wird dazu eine schrittweise Vorgehensweise angewandt, sofern die Daten nicht bereits in geeigneter Form vorliegen. Unnormalisierte Tabellen wie in der Ausgangssituation werden auch als nullte Normalform bezeichnet. Die Tabellen einer relationalen Datenbank werden zuerst in die erste Normalform, dann in die zweite Normalform und letztendlich in die dritte Normalform gebracht. Erst Tabellen, die sich in der dritten Normalform befinden, eignen sich für die Verwendung in einer relationalen Datenbank.
+
+#### Erste Normalform
+
+Die erste Normalform besagt, dass kein Datenfeld mehrfach in einer Tabelle vorkommen darf. Mehrfach enthaltene Datenfelder werden aus der Tabelle entfernt.
+
+Tabelle in der nullten Normalform:
+
+![0. NF](bilder/kap_03_m35_0nf.JPG)
+
+Tabelle in der ersten Normalform:
+
+![1. NF](bilder/kap_03_m35_1nf.JPG)
+
+#### Zweite Normalform
+
+Für die zweite Normalform muss zunächst die erste Normalform erfüllt sein. Jedes Datenfeld eines Datensatzes, das selbst kein Schlüssel ist, muss vom Schlüsselfeld abhängen.
+
+In unserem Beispiel wurde noch kein Schlüsselfeld vergeben. An dieser Stelle bietet sich eine Vergabe eines künstlichen Primärschlüssels an. Die potenziellen Kunden erhalten eine Kundennummer. Alle weiteren Datenfelder bzw. Attribute (z.B. Straße, Ort etc.) sind vom Schlüsselfeld abhängig und können so bestehen bleiben.
+
+Tabelle in der zweiten Normalform:
+
+![2. NF](bilder/kap_03_m35_2nf.JPG)
+
+Bei der Vergabe von Primärschlüsseln wird deutlich, dass die letzten Einträge doppelt angelegt wurden, also redundant sind. Redundanzen werden spätestens an dieser Stelle eliminiert.
+
+#### Dritte Normalform
+
+Für die dritte Normalform muss die (erste und) zweite Normalform erfüllt sein. Darüber hinaus darf jedes Datenfeld eines Datensatzes, das kein Schlüssel (-feld) ist, nur vom Schlüsselfeld und nicht von anderen Feldern eines Datensatzes abhängig sein.
+
+Somit dürfen keine Abhängigkeiten zwischen weiteren Feldern eines Datensatzes bestehen. Ist dies der Fall, wird eine weitere Tabelle angelegt.
+
+Tabelle in der dritten Normalform:
+
+![3. NF](bilder/kap_03_m35_3nf.JPG)
+
+In dem Beispiel wird deutlich, dass eine Abhängigkeit zwischen Ort und Postleitzahl besteht und somit ein Verstoß gegen die dritte Normalform vorliegt. Um diese Abhängigkeit aufzulösen, wird eine zweite Tabelle, ein "PLZ-Verzeichnis", angelegt. Die Postleitzahl fungiert hierbei als natürlicher Primärschlüssel. Über die Abfrage der PLZ kann nun automatisch der zugehörige Ort angezeigt werden.
+
+!!! note "Zusätzliches Material, weitere Übungen & Tipps"
+
+    Die folgenden Übungen und Tipps & Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br>*Ich kann, weil ich will, was ich muss! (Immanuel Kant)*
+
+## Zusatzmaterial
+
+// TODO Links einfügen
 
 {%
    include-markdown "inhalte/lizenzhinweis.md"
