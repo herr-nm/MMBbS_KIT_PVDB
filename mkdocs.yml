@@ -31,3 +31,5 @@ nav:
     - Kapitel 03 - Entwurf von Datenbanken & Normalisierung: 'kapitel_03.md'
     - Kapitel 04 - Entwurf von Datenbanken für MySQL: 'kapitel_04.md'
     - Kapitel 05 - Realisierung einer Datenbank mit MySQL: 'kapitel_05.md'
+    - Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT: 'kapitel_06.md'
+    
