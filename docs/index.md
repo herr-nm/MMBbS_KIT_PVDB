@@ -1,6 +1,6 @@
-# KIT - Prüfungsvorbereitung Datenbanken
+# KIT Prüfungsvorbereitung Datenbanken
 
-**Willkommen im PB-DB-Kurs der kaufmännischen IT-Berufe an den MMBbS.**
+**Willkommen im PV-DB-Kurs der kaufmännischen IT-Berufe an den MMBbS.**
 
 <br>
 
