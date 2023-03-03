@@ -1,0 +1,1005 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/kapitel_06.html">
+      
+      
+        <link rel="prev" href="kapitel_05.html">
+      
+      
+      <link rel="icon" href="bilder/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+    
+    
+      
+        <title>Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT - KIT Prüfungsvorbereitung Datenbanken</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kapitel-6-mysql-einfache-datenabfragen-mit-select" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-header__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KIT Prüfungsvorbereitung Datenbanken
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-nav__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    KIT Prüfungsvorbereitung Datenbanken
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Informationen zum Kurs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_01.html" class="md-nav__link">
+        Kapitel 01 - Modellunternehmen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_02.html" class="md-nav__link">
+        Kapitel 02 - Grundlagen Datenhaltung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_03.html" class="md-nav__link">
+        Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_04.html" class="md-nav__link">
+        Kapitel 04 - Entwurf von Datenbanken für MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_05.html" class="md-nav__link">
+        Kapitel 05 - Realisierung einer Datenbank mit MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="kapitel_06.html" class="md-nav__link md-nav__link--active">
+        Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kapitel-6-mysql-einfache-datenabfragen-mit-select" class="md-nav__link">
+    Kapitel 6: MySQL - Einfache Datenabfragen mit SELECT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-60-einfache-datenbankabfragen-mit-select-durchfuhren" class="md-nav__link">
+    Kompetenz 6.0: Einfache Datenbankabfragen mit SELECT durchführen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 6.0: Einfache Datenbankabfragen mit SELECT durchführen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a60-einfache-datenabfragen-mit-select" class="md-nav__link">
+    Arbeitsauftrag A|6.0: Einfache Datenabfragen mit SELECT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informationsmaterial-m60-select" class="md-nav__link">
+    Informationsmaterial M|6.0: SELECT
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|6.0: SELECT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grundlagen-zu-einfachen-datenabfragen-mit-select" class="md-nav__link">
+    Grundlagen zu einfachen Datenabfragen (mit SELECT)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-datenbank-zur-fuball-bundesliga" class="md-nav__link">
+    Beispiel - Datenbank zur Fußball-Bundesliga
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbau-der-sql-abfrage" class="md-nav__link">
+    Aufbau der SQL-Abfrage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fortsetzung-des-beispiels-datenbank-zur-fuball-bundesliga" class="md-nav__link">
+    Fortsetzung des Beispiels - Datenbank zur Fußball-Bundesliga
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hinweise-und-weitere-informationen" class="md-nav__link">
+    Hinweise und weitere Informationen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue60-vorbereitungen-fur-die-ubungen-dieses-kapitels" class="md-nav__link">
+    Übung UE|6.0: Vorbereitungen für die Übungen dieses Kapitels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue61-abfragen-zur-db_universitaet" class="md-nav__link">
+    Übung UE|6.1: Abfragen zur db_universitaet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kapitel-6-mysql-einfache-datenabfragen-mit-select" class="md-nav__link">
+    Kapitel 6: MySQL - Einfache Datenabfragen mit SELECT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-60-einfache-datenbankabfragen-mit-select-durchfuhren" class="md-nav__link">
+    Kompetenz 6.0: Einfache Datenbankabfragen mit SELECT durchführen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 6.0: Einfache Datenbankabfragen mit SELECT durchführen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a60-einfache-datenabfragen-mit-select" class="md-nav__link">
+    Arbeitsauftrag A|6.0: Einfache Datenabfragen mit SELECT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informationsmaterial-m60-select" class="md-nav__link">
+    Informationsmaterial M|6.0: SELECT
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|6.0: SELECT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grundlagen-zu-einfachen-datenabfragen-mit-select" class="md-nav__link">
+    Grundlagen zu einfachen Datenabfragen (mit SELECT)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-datenbank-zur-fuball-bundesliga" class="md-nav__link">
+    Beispiel - Datenbank zur Fußball-Bundesliga
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbau-der-sql-abfrage" class="md-nav__link">
+    Aufbau der SQL-Abfrage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fortsetzung-des-beispiels-datenbank-zur-fuball-bundesliga" class="md-nav__link">
+    Fortsetzung des Beispiels - Datenbank zur Fußball-Bundesliga
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hinweise-und-weitere-informationen" class="md-nav__link">
+    Hinweise und weitere Informationen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue60-vorbereitungen-fur-die-ubungen-dieses-kapitels" class="md-nav__link">
+    Übung UE|6.0: Vorbereitungen für die Übungen dieses Kapitels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue61-abfragen-zur-db_universitaet" class="md-nav__link">
+    Übung UE|6.1: Abfragen zur db_universitaet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT</h1>
+
+<h2 id="kapitel-6-mysql-einfache-datenabfragen-mit-select">Kapitel 6: MySQL - Einfache Datenabfragen mit SELECT</h2>
+<p><img alt="Kapitelbild" src="bilder/kap_06_kapitelbild.png" /></p>
+<p>In diesem Kapitel ...</p>
+<ul>
+<li>... führen Sie erste Abfragen mit der Datenbanksprache MySQL durch.</li>
+</ul>
+<hr />
+<div class="admonition example">
+<p class="admonition-title">Webversionen der Datenbanken</p>
+<p>Über die Links stehen Ihnen die Datenbanken zur Verfügung:</p>
+<ul>
+<li><a href="https://www.db-fiddle.com/f/mkHxub9CaFDyGgjvvoWMQk/0">db_bseverkauf</a></li>
+<li><a href="https://www.db-fiddle.com/f/ghBtL5urMFG87RtkrF7MJR/0">db_universitaet</a></li>
+</ul>
+</div>
+<h2 id="kompetenz-60-einfache-datenbankabfragen-mit-select-durchfuhren">Kompetenz 6.0: Einfache Datenbankabfragen mit SELECT durchführen</h2>
+<p>Die Mitarbeiter der BSE GmbH &amp; Co. KG haben des Öfteren Fragen an Matthias Thale, die er mithilfe seiner bisher eingesetzten Tabellenkalkulation klären konnte. Jetzt nachdem die Datenbank eingerichtet wurde und die ersten Datensätze einer vergangenen Abrechnungsperiode zum Testen erfasst sind, kann die Datenbank getestet werden.</p>
+<p>Thilo Ostiem hat eine Liste an Fragen erhalten, die Kolleginnen und Kollegen in der Vergangenheit hinsichtlich der Verkaufsplattform hatten. Nun soll er beweisen, dass die Datenbank schnell die gewünschten Informationen liefern kann. So will z.B. der Datenschutzbeauftragte wissen, welche Attribute für die Käufer gespeichert werden.</p>
+<hr />
+<h3 id="arbeitsauftrag-a60-einfache-datenabfragen-mit-select">Arbeitsauftrag A|6.0: Einfache Datenabfragen mit SELECT</h3>
+<ol>
+<li>Lassen Sie sich alle Käufer mit allen Attributen anzeigen.</li>
+<li>Welche Bundeslandabkürzungen gibt es und was bedeuten diese?</li>
+<li>Lassen Sie sich eine Liste aller in der Datenbank befindlichen Postleitzahlen (aus der Postleitzahlen-Tabelle) mit deren Orten anzeigen. Die Zuordnung der Bundesländer soll dabei nicht ausgegeben werden.</li>
+<li>Lassen Sie sich alle Verkäufer mit dem Nachnamen "Becker" anzeigen.</li>
+</ol>
+<details class="note">
+<summary>Beispiellösung zu 1.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Befehl</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tbl_kaeufer</span><span class="p">;</span>
+
+<span class="c1">-- Ausgabe</span>
+<span class="o">+</span><span class="c1">-----------+---------------+-----------------+------------------------------+-------+------------+----------------------------------------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">kaeuferPK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">nachname</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">vorname</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">anschrift</span><span class="w">                    </span><span class="o">|</span><span class="w"> </span><span class="n">plzFK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">geburtstag</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">firma</span><span class="w">                                                    </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+---------------+-----------------+------------------------------+-------+------------+----------------------------------------------------------+</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Lauterbach</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Heiner</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Am</span><span class="w"> </span><span class="n">Dorfkrug</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1952</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Mobiler</span><span class="w"> </span><span class="n">Frühstücksservice</span><span class="w">                                </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Purcell</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Dominic</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Eisenbahnweg</span><span class="w"> </span><span class="mi">19</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1970</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Erlebe</span><span class="w"> </span><span class="n">was</span><span class="o">!</span><span class="w"> </span><span class="n">Reise</span><span class="o">-</span><span class="n">und</span><span class="w"> </span><span class="n">Eventagentur</span><span class="w">                       </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Gordon</span><span class="o">-</span><span class="n">Levitt</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Joseph</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Kloster</span><span class="o">-</span><span class="n">Thedinga</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">83</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mi">19053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1981</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Carl</span><span class="w"> </span><span class="n">Wilh</span><span class="p">.</span><span class="w"> </span><span class="n">Meyer</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                           </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Carlson</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Kelly</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">der</span><span class="w"> </span><span class="n">Emsbrücke</span><span class="w"> </span><span class="mi">3</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1976</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DEKRA</span><span class="w"> </span><span class="n">Akademie</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                      </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Tatum</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Channing</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Burfehner</span><span class="w"> </span><span class="n">Weg</span><span class="w"> </span><span class="mi">50</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1980</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">August</span><span class="w"> </span><span class="n">Herzog</span><span class="w"> </span><span class="n">Maschinenfabrik</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Aniston</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Jennifer</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Reimersstr</span><span class="p">.</span><span class="w"> </span><span class="mi">18</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">89075</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1969</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Buddelei</span><span class="o">-</span><span class="k">Mode</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hardy</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Tom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Niedersachsenring</span><span class="w"> </span><span class="mi">6</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mi">65183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1977</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">HorFerVit</span><span class="w"> </span><span class="n">Pharma</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Pratt</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Chris</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Von</span><span class="o">-</span><span class="n">Jhering</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">9</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1979</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">AT</span><span class="w"> </span><span class="n">Anlagentechnik</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                   </span><span class="o">|</span>
+<span class="o">|</span><span class="w">         </span><span class="mi">9</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Pitt</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Brad</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Okko</span><span class="o">-</span><span class="n">ten</span><span class="o">-</span><span class="n">Broek</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">18059</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1963</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">18</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Beas</span><span class="o">-</span><span class="n">Büroservice</span><span class="w">                                         </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hunnam</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Charlie</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Tiergartenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">126</span><span class="w"> </span><span class="n">B</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">12524</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1980</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wohnwagen</span><span class="w"> </span><span class="n">Feldhus</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                   </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Tarantino</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Quentin</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Völgerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">15</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">50968</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1963</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Bertram</span><span class="w"> </span><span class="n">Zeitarbeit</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                  </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kruger</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Diane</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Fischerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">17</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1976</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">August</span><span class="w"> </span><span class="n">Cassens</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                             </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">13</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Roth</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Eli</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Stockmannstr</span><span class="p">.</span><span class="w"> </span><span class="mi">7</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">30559</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">cycle</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                         </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">14</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cumberbatch</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Benedict</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Fenskestr</span><span class="p">.</span><span class="w"> </span><span class="mi">42</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1976</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Tramann</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sohn</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w">                                </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DiCaprio</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Leonardo</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Podbielskistr</span><span class="p">.</span><span class="w"> </span><span class="mi">45</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1974</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TU</span><span class="w"> </span><span class="n">Unternehmensberatung</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                             </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">16</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Reeves</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Keanu</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Wohlenbergstr</span><span class="p">.</span><span class="w"> </span><span class="mi">26</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">18059</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1964</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">02</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Allmess</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                             </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Depp</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Johnny</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Widemannstr</span><span class="p">.</span><span class="w"> </span><span class="mi">20</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">65183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1963</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Heinrich</span><span class="w"> </span><span class="n">Hecker</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                            </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">18</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Fishburne</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Laurence</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Wettinerweg</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">E</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">21129</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1961</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">30</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mdp</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Moss</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Carrie</span><span class="o">-</span><span class="n">Anne</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Senefelderweg</span><span class="w"> </span><span class="mi">15</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">65183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1967</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Max</span><span class="w"> </span><span class="n">Hering</span><span class="w"> </span><span class="n">KG</span><span class="w">                                            </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">20</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Smith</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Will</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Fürstenwalder</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">4</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">50968</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1968</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Friedrich</span><span class="w"> </span><span class="n">Ahlers</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">21</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Spader</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">James</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Melanchthonstr</span><span class="p">.</span><span class="w"> </span><span class="mi">36</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Autopflegeservice</span><span class="w"> </span><span class="n">Berthmann</span><span class="w">                              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">22</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Mara</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Kate</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Lüchower</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">2</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">07554</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1983</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">27</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">McFit</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="n">Oldenburg</span><span class="w">                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">23</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hiddleston</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Tom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Grünewaldstr</span><span class="p">.</span><span class="w"> </span><span class="mi">27</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1981</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Fotocenter</span><span class="w"> </span><span class="n">Zarate</span><span class="w">                                        </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">24</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cavill</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Henry</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Gabelsbergerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">11</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mi">19053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1983</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">05</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wintermann</span><span class="w"> </span><span class="n">Druckhaus</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Evans</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Chris</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Tischbeinstr</span><span class="p">.</span><span class="w"> </span><span class="mi">15</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1981</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">13</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">AXIOS</span><span class="w"> </span><span class="mi">3</span><span class="n">D</span><span class="w"> </span><span class="n">Services</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                   </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">26</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Odenkirk</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Bob</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Willführstr</span><span class="p">.</span><span class="w"> </span><span class="mi">3</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">90427</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1962</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">22</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="n">Fashion</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">27</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cruise</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Tom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Striehlstr</span><span class="p">.</span><span class="w"> </span><span class="mi">11</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">70599</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1962</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">03</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="w"> </span><span class="n">Carstens</span><span class="w"> </span><span class="n">Textil</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                  </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">28</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Moore</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Julianne</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Hinter</span><span class="w"> </span><span class="n">der</span><span class="w"> </span><span class="n">Alten</span><span class="w"> </span><span class="n">Burg</span><span class="w"> </span><span class="mi">25</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mi">40213</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BA</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">Advice</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                  </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">29</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Gyllenhaal</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Jake</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Steinmetzstr</span><span class="p">.</span><span class="w"> </span><span class="mi">21</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">40213</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1980</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BAB</span><span class="w"> </span><span class="n">Automationstechnik</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">30</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">McConaughey</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Matthew</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Zieglerhof</span><span class="w"> </span><span class="mi">6</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1969</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">badgestalten</span><span class="p">.</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                       </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">31</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Evans</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Luke</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Hildesheimer</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">360</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1979</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Bahlmann</span><span class="w"> </span><span class="n">Bau</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                        </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cohan</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Lauren</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Hartenbrakenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="k">C</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1982</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Balance</span><span class="o">-</span><span class="n">Mediation</span><span class="w">                                        </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">33</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Thurman</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Uma</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Dieterichsstr</span><span class="p">.</span><span class="w"> </span><span class="mi">14</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">90427</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1970</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">29</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">34</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wilde</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Olivia</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Stockmannstr</span><span class="p">.</span><span class="w"> </span><span class="mi">4</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">21129</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1984</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">35</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Woll</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Deborah</span><span class="w"> </span><span class="n">Ann</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Uhlandstr</span><span class="p">.</span><span class="w"> </span><span class="mi">6</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1985</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">36</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cranston</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Bryan</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Hanomagstr</span><span class="p">.</span><span class="w"> </span><span class="mi">2</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">19053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1956</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">37</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Paul</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Aaron</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Podbielskistr</span><span class="p">.</span><span class="w"> </span><span class="mi">45</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1979</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">27</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">38</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Gunn</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Anna</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Am</span><span class="w"> </span><span class="n">Marstall</span><span class="w"> </span><span class="mi">23</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1968</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">39</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Willis</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Bruce</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Mozartstr</span><span class="p">.</span><span class="w"> </span><span class="mi">5</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1955</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">40</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Rohde</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Armin</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Alabasterweg</span><span class="w"> </span><span class="mi">14</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1955</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">41</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">George</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Götz</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Allerweg</span><span class="w"> </span><span class="mi">29</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1938</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">23</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">42</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Vogel</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Jürgen</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Kriegerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">24</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1968</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">29</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">43</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Fuchsberger</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Joachim</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Ritter</span><span class="o">-</span><span class="n">Brüning</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">36</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">86159</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1927</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">44</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">John</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Gottfried</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Weberstr</span><span class="p">.</span><span class="w"> </span><span class="mi">5</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1942</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">29</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">45</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">James</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Kevin</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Alte</span><span class="w"> </span><span class="n">Döhrener</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">19</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">07554</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1965</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">46</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Jaenicke</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Hannes</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Albert</span><span class="o">-</span><span class="n">Niemann</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">5</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">47</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Jackman</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Hugh</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Greitheweg</span><span class="w"> </span><span class="mi">23</span><span class="w"> </span><span class="n">A</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1968</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">48</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Jauch</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Günther</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">In</span><span class="w"> </span><span class="n">der</span><span class="w"> </span><span class="n">Steinbreite</span><span class="w"> </span><span class="mi">86</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1956</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">13</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">49</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Johnson</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Dwayne</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Salzhemmendorfer</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">3</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">02</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kalkofe</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Oliver</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Thaerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">19</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">23970</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1965</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">51</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kamps</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Gülcan</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Skagenhof</span><span class="w"> </span><span class="mi">13</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">70599</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1982</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">20</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">52</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Karrenbauer</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Katy</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Seilerstr</span><span class="p">.</span><span class="w"> </span><span class="mi">6</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">50968</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1962</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">53</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Keaton</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Diane</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Am</span><span class="w"> </span><span class="n">Herrenhäuser</span><span class="w"> </span><span class="n">Bahnhof</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1946</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">54</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Jolie</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Angelina</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Erichstr</span><span class="p">.</span><span class="w"> </span><span class="mi">4</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1975</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">55</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kerner</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Johannes</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Wilhelmstr</span><span class="p">.</span><span class="w"> </span><span class="mi">8</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1964</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">56</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kerkeling</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Hape</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Papenstieg</span><span class="w"> </span><span class="mi">17</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">14482</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1964</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">57</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kidman</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Nicole</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Greitheweg</span><span class="w"> </span><span class="mi">16</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1967</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">58</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kingsley</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Ben</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Koldinger</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">19</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">50968</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1943</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">59</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kier</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Udo</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Voltastr</span><span class="p">.</span><span class="w"> </span><span class="mi">5</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">21129</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1944</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">14</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">60</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kline</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Kevin</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Wilksheide</span><span class="w"> </span><span class="mi">74</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1947</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">24</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">61</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MacLachlan</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Kyle</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Merianweg</span><span class="w"> </span><span class="mi">39</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">90427</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1959</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">22</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">62</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Lynch</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">David</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Waldstr</span><span class="p">.</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="n">A</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">04319</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1946</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">20</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">63</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Norris</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Chuck</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Im</span><span class="w"> </span><span class="n">Kleinen</span><span class="w"> </span><span class="n">Bruche</span><span class="w"> </span><span class="mi">21</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">23970</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1940</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">64</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nolte</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Nick</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Perelsweg</span><span class="w"> </span><span class="mi">10</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1941</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">08</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">65</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nuhr</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Dieter</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Gradestr</span><span class="p">.</span><span class="w"> </span><span class="mi">7</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">66</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Ohrt</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Christoph</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Ricklinger</span><span class="w"> </span><span class="n">Stadtweg</span><span class="w"> </span><span class="mi">10</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">30</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">67</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Ochsenknecht</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Uwe</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Gradestr</span><span class="p">.</span><span class="w"> </span><span class="mi">7</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1956</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">68</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nimoy</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Leonard</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Blumenauer</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">31</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1931</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">69</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Olm</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Hans</span><span class="w"> </span><span class="n">Werner</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Tulpenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">6</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">89075</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1955</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">70</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Pacino</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Al</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="n">Andersenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">11</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">40213</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1940</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">71</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Paltrow</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Gwyneth</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Hänselriede</span><span class="w"> </span><span class="mi">11</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mi">39106</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">72</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Parker</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Sarah</span><span class="w"> </span><span class="n">Jessica</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Uslarplatz</span><span class="w"> </span><span class="mi">2</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1965</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">73</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Penn</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Sean</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Berliner</span><span class="w"> </span><span class="n">Allee</span><span class="w"> </span><span class="mi">68</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">74</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Pastewka</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Bastian</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Badenstedter</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">200</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">75</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Russell</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Kurt</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Louise</span><span class="o">-</span><span class="n">Schroeder</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">3</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">40213</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1951</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">76</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Ryan</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Meg</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Schneiderberg</span><span class="w"> </span><span class="mi">25</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">23970</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1961</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">77</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Rourke</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Mickey</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Ihmeplatz</span><span class="w"> </span><span class="mi">8</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">70599</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1952</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">16</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">78</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sandler</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Adam</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Lutherstr</span><span class="p">.</span><span class="w"> </span><span class="mi">26</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">12524</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1966</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">79</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Schmidt</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Harald</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Auwiese</span><span class="w"> </span><span class="mi">15</span><span class="w">                   </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1957</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">18</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">80</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sander</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Erol</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Tresckowstr</span><span class="p">.</span><span class="w"> </span><span class="mi">16</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1968</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">09</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">81</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Salzgeber</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Rainer</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">Salfeldstr</span><span class="p">.</span><span class="w"> </span><span class="mi">1</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">23970</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1969</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">82</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sutherland</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Donald</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Leinaustr</span><span class="p">.</span><span class="w"> </span><span class="mi">12</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">04319</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1935</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">83</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sutherland</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Kiefer</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Lohkamp</span><span class="w"> </span><span class="mi">7</span><span class="w">                    </span><span class="o">|</span><span class="w"> </span><span class="mi">26316</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1966</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">84</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Stratham</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Jason</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Darwinstr</span><span class="p">.</span><span class="w"> </span><span class="mi">4</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">26316</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">85</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Damme</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Jean</span><span class="w"> </span><span class="n">Claude</span><span class="w"> </span><span class="n">van</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Plauener</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">25</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1960</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">18</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">86</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Vaughn</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Vince</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Osterfelddamm</span><span class="w"> </span><span class="mi">99</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">26316</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1970</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">87</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hirschhausen</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Dr</span><span class="p">.</span><span class="w"> </span><span class="n">Eckart</span><span class="w"> </span><span class="n">von</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Döhrbruch</span><span class="w"> </span><span class="mi">13</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">39106</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1967</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">88</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wagner</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Robert</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Im</span><span class="w"> </span><span class="n">Großen</span><span class="w"> </span><span class="n">Büchenfeld</span><span class="w"> </span><span class="mi">8</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">28199</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1930</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">89</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Lippe</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Jürgen</span><span class="w"> </span><span class="n">von</span><span class="w"> </span><span class="n">der</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Heinrich</span><span class="o">-</span><span class="n">Meister</span><span class="o">-</span><span class="n">Allee</span><span class="w"> </span><span class="mi">16</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mi">28199</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1948</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">08</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">90</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Walken</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Christopher</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Auerhahnhof</span><span class="w"> </span><span class="mi">8</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">90427</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1943</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">31</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">91</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wahlberg</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Mark</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Raabestr</span><span class="p">.</span><span class="w"> </span><span class="mi">10</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1971</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">05</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">92</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Christoph</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Waltz</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Hägewiesen</span><span class="w"> </span><span class="mi">18</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="mi">14482</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1956</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">                                                     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">93</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cage</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Nicolas</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Kokenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">1</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="mi">65183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1964</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">07</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Deutsche</span><span class="w"> </span><span class="n">Presse</span><span class="o">-</span><span class="n">Agentur</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                             </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">94</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Busse</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Jochen</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Osteroder</span><span class="w"> </span><span class="n">Weg</span><span class="w"> </span><span class="mi">4</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">21129</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1941</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DEUS</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="n">KG</span><span class="w"> </span><span class="n">Spedition</span><span class="w"> </span><span class="n">Möbeltransport</span><span class="w"> </span><span class="n">International</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">95</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Carrey</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Jim</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">Schäferweg</span><span class="w"> </span><span class="mi">8</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span><span class="mi">70599</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1962</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="w"> </span><span class="n">W</span><span class="p">.</span><span class="w"> </span><span class="n">Filmer</span><span class="w">                                             </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">96</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cruz</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Penélope</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Moorhoffstr</span><span class="p">.</span><span class="w"> </span><span class="mi">35</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">39106</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1974</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="w"> </span><span class="n">Electronics</span><span class="w">                                        </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">97</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cyrus</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">Miley</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Im</span><span class="w"> </span><span class="n">Kleinen</span><span class="w"> </span><span class="n">Bruche</span><span class="w"> </span><span class="mi">52</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">86159</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1992</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">23</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Büsing</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Fasch</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="n">KG</span><span class="w">                              </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">98</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Garner</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Jennifer</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Kugelfangtrift</span><span class="w"> </span><span class="mi">146</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1972</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BUG</span><span class="w"> </span><span class="n">GmbH</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Co</span><span class="p">.</span><span class="w"> </span><span class="n">KG</span><span class="w">                                        </span><span class="o">|</span>
+<span class="o">|</span><span class="w">        </span><span class="mi">99</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Furtwängler</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Maria</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Ferdinand</span><span class="o">-</span><span class="n">Wallbrecht</span><span class="o">-</span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">78</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">14482</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1966</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">13</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BTC</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">Technology</span><span class="w"> </span><span class="n">Consulting</span><span class="w"> </span><span class="n">AG</span><span class="w">                    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">       </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hunt</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">Helen</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">In</span><span class="w"> </span><span class="n">der</span><span class="w"> </span><span class="n">Steinriede</span><span class="w"> </span><span class="mi">7</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1963</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Buchhandlung</span><span class="w"> </span><span class="n">Libretto</span><span class="w">                                    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">       </span><span class="mi">101</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Johansson</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Scarlett</span><span class="w"> </span><span class="n">Marie</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Helwingerodestr</span><span class="p">.</span><span class="w"> </span><span class="mi">5</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1984</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">22</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Bruns</span><span class="w"> </span><span class="n">Berufskleidung</span><span class="w"> </span><span class="n">GmbH</span><span class="w">                                </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+---------------+-----------------+------------------------------+-------+------------+----------------------------------------------------------+</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>Beispiellösung zu 2.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Befehl</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tbl_bundesland</span><span class="p">;</span>
+
+<span class="c1">-- Ausgabe</span>
+<span class="o">+</span><span class="c1">--------------+------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">bundeslandPK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">bundeslandname</span><span class="w">         </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">BB</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Brandenburg</span><span class="w">            </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">BE</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Berlin</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">BW</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Baden</span><span class="o">-</span><span class="n">Württemberg</span><span class="w">      </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="k">BY</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Bayern</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">HB</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Bremen</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">HE</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Hessen</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">HH</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Hamburg</span><span class="w">                </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">MV</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Mecklemburg</span><span class="o">-</span><span class="n">Vorpommern</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">NI</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Niedersachsen</span><span class="w">          </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">NW</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Nordrhein</span><span class="o">-</span><span class="n">Westfalen</span><span class="w">    </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">RP</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Rheinland</span><span class="o">-</span><span class="n">Pfalz</span><span class="w">        </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">SH</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Schleswig</span><span class="o">-</span><span class="n">Holstein</span><span class="w">     </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">SL</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Saarland</span><span class="w">               </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">SN</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Sachsen</span><span class="w">                </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">ST</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Sachsen</span><span class="o">-</span><span class="n">Anhalt</span><span class="w">         </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">TH</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">Thüringen</span><span class="w">              </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+------------------------+</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>Beispiellösung zu 3.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Befehl</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">plzPK</span><span class="p">,</span><span class="w"> </span><span class="n">ort</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tbl_plz</span><span class="p">;</span>
+
+<span class="c1">-- Ausgabe</span>
+<span class="o">+</span><span class="c1">-------+-------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">plzPK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ort</span><span class="w">               </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+-------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">01099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Dresden</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">04319</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Leipzig</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">07554</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Gera</span><span class="w">              </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">12524</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Berlin</span><span class="w">            </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">14482</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Potsdam</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">18059</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Rostock</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">19053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Schwerin</span><span class="w">          </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">21129</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hamburg</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">23568</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Lübeck</span><span class="w">            </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">23970</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wismar</span><span class="w">            </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">24105</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kiel</span><span class="w">              </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Oldenburg</span><span class="w">         </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">26316</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Varel</span><span class="w">             </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">28199</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Bremen</span><span class="w">            </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">30559</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Hannover</span><span class="w">          </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">39106</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Magdeburg</span><span class="w">         </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">40213</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Düsseldorf</span><span class="w">        </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">50968</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Köln</span><span class="w">              </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">55128</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Mainz</span><span class="w">             </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">60329</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Frankfurt</span><span class="w"> </span><span class="n">am</span><span class="w"> </span><span class="n">Main</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">65183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Wiesbaden</span><span class="w">         </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">66126</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Saarbrücken</span><span class="w">       </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">70599</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Stuttgart</span><span class="w">         </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">80331</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">München</span><span class="w">           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">86159</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Augsburg</span><span class="w">          </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">89075</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Ulm</span><span class="w">               </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">90427</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nürnberg</span><span class="w">          </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">99090</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Erfurt</span><span class="w">            </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+-------------------+</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>Beispiellösung zu 4.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Befehl</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tbl_verkaeufer</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">nachname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Becker&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Ausgabe</span>
+<span class="o">+</span><span class="c1">--------------+-----------+----------+-----------------------+-------+------------+--------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">verkaeuferPK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">vorname</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">nachname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">anschrift</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">plzFK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">geburtstag</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">firma</span><span class="w">              </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------+----------+-----------------------+-------+------------+--------------------+</span>
+<span class="o">|</span><span class="w">           </span><span class="mi">38</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Charlotte</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Becker</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Eggenfeldener</span><span class="w"> </span><span class="n">Str</span><span class="p">.</span><span class="w"> </span><span class="mi">64</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">26121</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1983</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">19</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Waas</span><span class="o">-</span><span class="n">Online</span><span class="p">.</span><span class="n">de</span><span class="w">     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">           </span><span class="mi">39</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Maritta</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Becker</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Mechthildenstr</span><span class="p">.</span><span class="w"> </span><span class="mi">42</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mi">12524</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1981</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Distler</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------+----------+-----------------------+-------+------------+--------------------+</span>
+</code></pre></div>
+</details>
+<hr />
+<h3 id="informationsmaterial-m60-select">Informationsmaterial M|6.0: SELECT</h3>
+<h4 id="grundlagen-zu-einfachen-datenabfragen-mit-select">Grundlagen zu einfachen Datenabfragen (mit SELECT)</h4>
+<p>Für gezielte Abfragen der gespeicherten Daten in einer Datenbank wird in SQL die <code>SELECT</code>-Anweisung verwendet. Sie ist die komplexeste SQL-Anweisung, besitzt viele optionale Erweiterungen und wird in der Praxis am häufigsten genutzt.</p>
+<p>Die <code>SELECT</code>-Anweisung ähnelt einer Frage bzw. Aufforderung an das Datenbanksystem, die gewünschten Daten zu liefern.</p>
+<h4 id="beispiel-datenbank-zur-fuball-bundesliga">Beispiel - Datenbank zur Fußball-Bundesliga</h4>
+<p>In der Datenbank db_bundesliga sind die Tabellen <em>tbl_spieler</em>, <em>tbl_verein</em> und <em>tbl_position</em> angelegt. Der Aufbau sieht im ERM wie folgt aus:</p>
+<p><img alt="ERM Bundesliga" src="bilder/kap_06_db_bundesliga.png" /></p>
+<p>Die Tabelle <em>tbl_spieler</em> enthält dabei folgende Daten:</p>
+<div class="highlight"><pre><span></span><code>+-----------+--------------+-----------+----------+------------+-----------+------------+
+| spielerPK | nachname     | vorname   | vereinFK | positionFK | rueckennr | geburtstag |
++-----------+--------------+-----------+----------+------------+-----------+------------+
+|         1 | Weidenfeller | Roman     |        1 |          1 |         1 | 1980-08-06 |
+|         2 | Martinez     | Javier    |        2 |          2 |         8 | 1988-09-02 |
+|         3 | Fritz        | Clemens   |        3 |          2 |         8 | 1980-12-07 |
+|         4 | Meyer        | Max       |        4 |          3 |        10 | 1995-09-18 |
+|         5 | Sulejmani    | Valmir    |        5 |          4 |        38 | 1996-02-01 |
+|         6 | Schulz       | Christian |        5 |          2 |        19 | 1983-04-01 |
+|         7 | Reus         | Marco     |        1 |          3 |        11 | 1989-05-31 |
+|         8 | Schmelzer    | Marcel    |        1 |          2 |        29 | 1988-01-22 |
++-----------+--------------+-----------+----------+------------+-----------+------------+
+</code></pre></div>
+<h4 id="aufbau-der-sql-abfrage">Aufbau der SQL-Abfrage</h4>
+<p>Jede SQL-Abfrage hat drei Hauptbefehle:</p>
+<div class="highlight"><pre><span></span><code>SELECT  (engl. auswählen)
+FROM    (engl. von)
+WHERE   (engl. wo)
+</code></pre></div>
+<p>Mit <code>FROM</code> wird die Tabelle ausgewählt, aus der die gewünschten Informationen stammen. Mit <code>SELECT</code> wird angegeben, welche Attribute (Spalten) hieraus in der Ergebnistabelle ausgegeben werden sollen. Zuletzt wird die optionale <code>WHERE</code>-Bedingung angegeben. Hierin können bestimmte Datensätze (Zeilen) ausgewählt werden. <code>WHERE</code> kann aus einer <code>SELECT</code>-Anweisung weggelassen werden, wenn alle Datensätze ausgegeben werden sollen.</p>
+<h4 id="fortsetzung-des-beispiels-datenbank-zur-fuball-bundesliga">Fortsetzung des Beispiels - Datenbank zur Fußball-Bundesliga</h4>
+<p>Wir wollen wissen, welche Spieler die Rückennummer 8 haben. Also hieße die SQL-Abfrage:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nachname</span><span class="p">,</span><span class="w"> </span><span class="n">vorname</span><span class="p">,</span><span class="w"> </span><span class="n">ruckennr</span><span class="w">  </span><span class="n">Welche</span><span class="w"> </span><span class="n">Attribute</span><span class="w"> </span><span class="p">(</span><span class="n">Spalten</span><span class="p">)</span><span class="o">?</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tbl_spieler</span><span class="w">    </span><span class="n">Aus</span><span class="w"> </span><span class="n">welcher</span><span class="w"> </span><span class="n">Tabelle</span><span class="o">?</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">rueckennr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w">    </span><span class="n">Welche</span><span class="w"> </span><span class="n">Datensätze</span><span class="w"> </span><span class="p">(</span><span class="n">Zeilen</span><span class="p">)</span><span class="o">?</span>
+</code></pre></div>
+Ergebnis der SQL-Abfrage:</p>
+<div class="highlight"><pre><span></span><code>+----------+---------+-----------+
+| nachname | vorname | rueckennr |
++----------+---------+-----------+
+| Martinez | Javier  |         8 |
+| Fritz    | Clemens |         8 |
++----------+---------+-----------+
+</code></pre></div>
+<h4 id="hinweise-und-weitere-informationen">Hinweise und weitere Informationen</h4>
+<ul>
+<li>Wenn man alle Spalten einer Tabelle angezeigt haben möchte, kann man auch einfach ein <code>*</code> im <code>SELECT</code>-Teil einsetzen.</li>
+<li>Zeichenketten (Strings) wie zum Beispiel <code>'Schulz'</code> oder ein Datum <code>'1989-05-31'</code> setzt man in einfache Anführungszeichen.</li>
+<li>Es können Bedingungen so formuliert werden, dass keine Datensätze zurückgeliefert werden. Dann ist das Ergebnis eine leere Menge. So würde die im Beispiel genannte Suche mit der <code>WHERE</code>-Bedingung <code>vorname = 'Walter'</code> eine leere Tabelle ausgeben.</li>
+<li>Bei den Tabellennamen muss die Groß-/Kleinschreibung beachtet werden.</li>
+<li>Zur besseren Übersicht sollten die MySQL-Befehle immer in <code>GROSSBUCHSTABEN</code> geschrieben werden.</li>
+<li>Die Ergebnismenge kann z.B. mit <code>LIMIT 10</code> auf 10 Zeilen begrenzt werden.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Zusätzliches Material, weitere Übungen &amp; Tipps</p>
+<p>Die folgenden Übungen und Tipps &amp; Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br><em>Ich kann, weil ich will, was ich muss! (Immanuel Kant)</em></p>
+</div>
+<h2 id="ubungen">Übungen</h2>
+<h3 id="ubung-ue60-vorbereitungen-fur-die-ubungen-dieses-kapitels">Übung UE|6.0: Vorbereitungen für die Übungen dieses Kapitels</h3>
+<p>Importieren Sie die db_universitaet neu aus der SQL-Datei (s.u.):</p>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">db_universitaet</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">db_universitaet</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">db_universitaet</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_student</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">studentPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vorname</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">    </span><span class="n">nachname</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">studentPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_buch</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">buchPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">titel</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">buchPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_professor</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">professorPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vorname</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">    </span><span class="n">nachname</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">professorPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_vorlesung</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">vorlesungPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">professorFK</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">titel</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+<span class="w">    </span><span class="n">stundenanzahl</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungPK</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">professorFK</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tbl_professor</span><span class="w"> </span><span class="p">(</span><span class="n">professorPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_besucht</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">besuchtPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">studentFK</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vorlesungFK</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">besuchtPK</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">studentFK</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tbl_student</span><span class="w"> </span><span class="p">(</span><span class="n">studentPK</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungFK</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tbl_vorlesung</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tbl_benoetigt</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">benoetigtPK</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vorlesungFK</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">buchFK</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">benoetigtPK</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungFK</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tbl_vorlesung</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungPK</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">buchFK</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tbl_buch</span><span class="w"> </span><span class="p">(</span><span class="n">buchPK</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_student</span><span class="w"> </span><span class="p">(</span><span class="n">vorname</span><span class="p">,</span><span class="w"> </span><span class="n">nachname</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Rainer&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Zufall&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Robin&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Hutt&quot;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_buch</span><span class="w"> </span><span class="p">(</span><span class="n">titel</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Quantenphysik für Dummies&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Kritik der reinen Vernunft&quot;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_professor</span><span class="w"> </span><span class="p">(</span><span class="n">vorname</span><span class="p">,</span><span class="w"> </span><span class="n">nachname</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Andy&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Arbeit&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="ss">&quot;Theo&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Rist&quot;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_vorlesung</span><span class="w"> </span><span class="p">(</span><span class="n">professorFK</span><span class="p">,</span><span class="w"> </span><span class="n">titel</span><span class="p">,</span><span class="w"> </span><span class="n">stundenanzahl</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Einführung in die Quantenphysik&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Philosophie des Immanuel Kant&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_benoetigt</span><span class="w"> </span><span class="p">(</span><span class="n">vorlesungFK</span><span class="p">,</span><span class="w"> </span><span class="n">buchFK</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tbl_besucht</span><span class="w"> </span><span class="p">(</span><span class="n">studentFK</span><span class="p">,</span><span class="w"> </span><span class="n">vorlesungFK</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h3 id="ubung-ue61-abfragen-zur-db_universitaet">Übung UE|6.1: Abfragen zur db_universitaet</h3>
+<p>Welche Abfragen sind notwendig?</p>
+<ol>
+<li>Lassen Sie sich alle Professoren mit allen Attributen anzeigen.</li>
+<li>Es wird für einen Serienbrief eine Liste der Vor- und Nachnamen aller Studenten benötigt.</li>
+<li>Welche Vorlesungen werden angeboten?</li>
+<li>Ein Student möchte Wissen, welche Buchtitel er für das Studium bestellen muss. Lassen Sie sich eine Liste aller Buchtitel ausgeben.</li>
+<li>Zur Kontrolle der Datenbank soll die Tabelle tbl_benoetigt analysiert werden. Lassen Sie sich alle Attribute anzeigen. Beschreiben Sie die Funktion und Bedeutung der tbl_benoetigt im Rahmen der db_universitaet.</li>
+</ol>
+<!-- BEGIN INCLUDE inhalte/lizenzhinweis.md '&lt;!--include-start--&gt;' '&lt;!--include-end--&gt;' -->
+
+<div class="admonition info">
+<p class="admonition-title">Lizenz</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Der PV-DB-Kurs</span> von <a xmlns:cc="http://creativecommons.org/ns#" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/" property="cc:attributionName" rel="cc:attributionURL"> Oliver Schwenke &amp; André Neumann</a> ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Fragen, Hinweise etc. an neumann@mmbbs.de.</p>
+</div>
+<!-- END INCLUDE -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ce72ebac.min.js"></script>
+      
+    
+  </body>
+</html>

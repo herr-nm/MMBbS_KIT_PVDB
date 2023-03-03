@@ -1,0 +1,1367 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/kapitel_03.html">
+      
+      
+        <link rel="prev" href="kapitel_02.html">
+      
+      
+        <link rel="next" href="kapitel_04.html">
+      
+      <link rel="icon" href="bilder/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+    
+    
+      
+        <title>Kapitel 03 - Entwurf von Datenbanken & Normalisierung - KIT Prüfungsvorbereitung Datenbanken</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kapitel-3-entwurf-von-datenbanken-normalisierung" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-header__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KIT Prüfungsvorbereitung Datenbanken
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-nav__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    KIT Prüfungsvorbereitung Datenbanken
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Informationen zum Kurs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_01.html" class="md-nav__link">
+        Kapitel 01 - Modellunternehmen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_02.html" class="md-nav__link">
+        Kapitel 02 - Grundlagen Datenhaltung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="kapitel_03.html" class="md-nav__link md-nav__link--active">
+        Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-30-er-diagramme-beschreiben" class="md-nav__link">
+    Kompetenz 3.0: ER-Diagramme beschreiben
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a30-beschreiben-eines-er-diagrammes" class="md-nav__link">
+    Arbeitsauftrag A|3.0: Beschreiben eines ER-Diagrammes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a31-beziehungstypen" class="md-nav__link">
+    Arbeitsauftrag A|3.1: Beziehungstypen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m30-grundlagen-des-entity-relationship-modells-erm" class="md-nav__link">
+    Informationsmaterial M|3.0: Grundlagen des Entity-Relationship-Modells (ERM)
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.0: Grundlagen des Entity-Relationship-Modells (ERM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grundlagen-software" class="md-nav__link">
+    Grundlagen &amp; Software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entitat-entity" class="md-nav__link">
+    Entität (Entity)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribut" class="md-nav__link">
+    Attribut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beziehung-relationship" class="md-nav__link">
+    Beziehung (Relationship)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primarschlussel-primary-key" class="md-nav__link">
+    Primärschlüssel (Primary Key)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kardinalitaten-cardinalities" class="md-nav__link">
+    Kardinalitäten (Cardinalities)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m31-schlusselattribute" class="md-nav__link">
+    Informationsmaterial M|3.1: Schlüsselattribute
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.1: Schlüsselattribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primarschlussel" class="md-nav__link">
+    Primärschlüssel
+  </a>
+  
+    <nav class="md-nav" aria-label="Primärschlüssel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naturlicher-primarschlussel" class="md-nav__link">
+    Natürlicher Primärschlüssel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kunstlicher-primarschlussel" class="md-nav__link">
+    Künstlicher Primärschlüssel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammengesetzter-primarschlussel" class="md-nav__link">
+    Zusammengesetzter Primärschlüssel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fremdschlussel" class="md-nav__link">
+    Fremdschlüssel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m32-grundlagen-der-beziehungstypen-kardinalitaten" class="md-nav__link">
+    Informationsmaterial M|3.2: Grundlagen der Beziehungstypen / Kardinalitäten
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.2: Grundlagen der Beziehungstypen / Kardinalitäten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-zu-1-beziehung-11" class="md-nav__link">
+    1-zu-1-Beziehung (1:1)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-zu-n-beziehung-1n" class="md-nav__link">
+    1-zu-n-Beziehung (1:n)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-zu-m-beziehung-nm" class="md-nav__link">
+    n-zu-m-Beziehung (n:m)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-31-er-diagramme-erstellen" class="md-nav__link">
+    Kompetenz 3.1: ER-Diagramme erstellen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 3.1: ER-Diagramme erstellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a32-erm-beziehungstypen" class="md-nav__link">
+    Arbeitsauftrag A|3.2: ERM - Beziehungstypen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a33-das-erste-er-diagramm" class="md-nav__link">
+    Arbeitsauftrag A|3.3: Das erste ER-Diagramm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m33-kurzschreibweise" class="md-nav__link">
+    Informationsmaterial M|3.3: Kurzschreibweise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m34-erm-konventionen" class="md-nav__link">
+    Informationsmaterial M|3.4: ERM-Konventionen
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.4: ERM-Konventionen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entitat" class="md-nav__link">
+    Entität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribut_1" class="md-nav__link">
+    Attribut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primarschlusselattribute" class="md-nav__link">
+    Primärschlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fremdschlusselattribute" class="md-nav__link">
+    Fremdschlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beziehungen" class="md-nav__link">
+    Beziehungen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beziehungsentitaten" class="md-nav__link">
+    Beziehungsentitäten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-32-prozess-der-normalisierung-berucksichtigen" class="md-nav__link">
+    Kompetenz 3.2: Prozess der Normalisierung berücksichtigen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 3.2: Prozess der Normalisierung berücksichtigen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a34-tabellen-beurteilen" class="md-nav__link">
+    Arbeitsauftrag A|3.4: Tabellen beurteilen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a35-prozess-zur-normalisierung" class="md-nav__link">
+    Arbeitsauftrag A|3.5: Prozess zur Normalisierung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m35-normalisierung-einer-datenbank" class="md-nav__link">
+    Informationsmaterial M|3.5: Normalisierung einer Datenbank
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.5: Normalisierung einer Datenbank">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redundanzen-notwendigkeit-einer-normalisierung" class="md-nav__link">
+    Redundanzen / Notwendigkeit einer Normalisierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erste-normalform" class="md-nav__link">
+    Erste Normalform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zweite-normalform" class="md-nav__link">
+    Zweite Normalform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dritte-normalform" class="md-nav__link">
+    Dritte Normalform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_04.html" class="md-nav__link">
+        Kapitel 04 - Entwurf von Datenbanken für MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_05.html" class="md-nav__link">
+        Kapitel 05 - Realisierung einer Datenbank mit MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_06.html" class="md-nav__link">
+        Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-30-er-diagramme-beschreiben" class="md-nav__link">
+    Kompetenz 3.0: ER-Diagramme beschreiben
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a30-beschreiben-eines-er-diagrammes" class="md-nav__link">
+    Arbeitsauftrag A|3.0: Beschreiben eines ER-Diagrammes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a31-beziehungstypen" class="md-nav__link">
+    Arbeitsauftrag A|3.1: Beziehungstypen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m30-grundlagen-des-entity-relationship-modells-erm" class="md-nav__link">
+    Informationsmaterial M|3.0: Grundlagen des Entity-Relationship-Modells (ERM)
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.0: Grundlagen des Entity-Relationship-Modells (ERM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grundlagen-software" class="md-nav__link">
+    Grundlagen &amp; Software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entitat-entity" class="md-nav__link">
+    Entität (Entity)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribut" class="md-nav__link">
+    Attribut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beziehung-relationship" class="md-nav__link">
+    Beziehung (Relationship)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primarschlussel-primary-key" class="md-nav__link">
+    Primärschlüssel (Primary Key)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kardinalitaten-cardinalities" class="md-nav__link">
+    Kardinalitäten (Cardinalities)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m31-schlusselattribute" class="md-nav__link">
+    Informationsmaterial M|3.1: Schlüsselattribute
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.1: Schlüsselattribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primarschlussel" class="md-nav__link">
+    Primärschlüssel
+  </a>
+  
+    <nav class="md-nav" aria-label="Primärschlüssel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naturlicher-primarschlussel" class="md-nav__link">
+    Natürlicher Primärschlüssel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kunstlicher-primarschlussel" class="md-nav__link">
+    Künstlicher Primärschlüssel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammengesetzter-primarschlussel" class="md-nav__link">
+    Zusammengesetzter Primärschlüssel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fremdschlussel" class="md-nav__link">
+    Fremdschlüssel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m32-grundlagen-der-beziehungstypen-kardinalitaten" class="md-nav__link">
+    Informationsmaterial M|3.2: Grundlagen der Beziehungstypen / Kardinalitäten
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.2: Grundlagen der Beziehungstypen / Kardinalitäten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-zu-1-beziehung-11" class="md-nav__link">
+    1-zu-1-Beziehung (1:1)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-zu-n-beziehung-1n" class="md-nav__link">
+    1-zu-n-Beziehung (1:n)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-zu-m-beziehung-nm" class="md-nav__link">
+    n-zu-m-Beziehung (n:m)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-31-er-diagramme-erstellen" class="md-nav__link">
+    Kompetenz 3.1: ER-Diagramme erstellen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 3.1: ER-Diagramme erstellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a32-erm-beziehungstypen" class="md-nav__link">
+    Arbeitsauftrag A|3.2: ERM - Beziehungstypen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a33-das-erste-er-diagramm" class="md-nav__link">
+    Arbeitsauftrag A|3.3: Das erste ER-Diagramm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m33-kurzschreibweise" class="md-nav__link">
+    Informationsmaterial M|3.3: Kurzschreibweise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m34-erm-konventionen" class="md-nav__link">
+    Informationsmaterial M|3.4: ERM-Konventionen
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.4: ERM-Konventionen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entitat" class="md-nav__link">
+    Entität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribut_1" class="md-nav__link">
+    Attribut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primarschlusselattribute" class="md-nav__link">
+    Primärschlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fremdschlusselattribute" class="md-nav__link">
+    Fremdschlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beziehungen" class="md-nav__link">
+    Beziehungen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beziehungsentitaten" class="md-nav__link">
+    Beziehungsentitäten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-32-prozess-der-normalisierung-berucksichtigen" class="md-nav__link">
+    Kompetenz 3.2: Prozess der Normalisierung berücksichtigen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 3.2: Prozess der Normalisierung berücksichtigen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a34-tabellen-beurteilen" class="md-nav__link">
+    Arbeitsauftrag A|3.4: Tabellen beurteilen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a35-prozess-zur-normalisierung" class="md-nav__link">
+    Arbeitsauftrag A|3.5: Prozess zur Normalisierung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m35-normalisierung-einer-datenbank" class="md-nav__link">
+    Informationsmaterial M|3.5: Normalisierung einer Datenbank
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|3.5: Normalisierung einer Datenbank">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redundanzen-notwendigkeit-einer-normalisierung" class="md-nav__link">
+    Redundanzen / Notwendigkeit einer Normalisierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erste-normalform" class="md-nav__link">
+    Erste Normalform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zweite-normalform" class="md-nav__link">
+    Zweite Normalform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dritte-normalform" class="md-nav__link">
+    Dritte Normalform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kapitel-3-entwurf-von-datenbanken-normalisierung">Kapitel 3: Entwurf von Datenbanken &amp; Normalisierung</h1>
+<p><img alt="Kapitelbild" src="bilder/kap_03_kapitelbild.png" /></p>
+<p>In diesem Kapitel ...</p>
+<ul>
+<li>... analysieren Sie als Datenbank zu realisierende Zustände von Systemen.</li>
+<li>... erfahren Sie mehr zur Modellierungstechnik ERM.</li>
+<li>... beurteilen Sie vorliegende Tabellen.</li>
+<li>... identifizieren Sie Probleme mit der Datenhaltung bestimmter Tabellen.</li>
+<li>... führen Sie die Schritte der Normalisierung durch.</li>
+</ul>
+<hr />
+<h2 id="kompetenz-30-er-diagramme-beschreiben">Kompetenz 3.0: ER-Diagramme beschreiben</h2>
+<p>Nachdem Matthias Thale nun mehr über Datenbanken weiß, möchte er diese erst einmal konzeptionell entwerfen, bevor er mit der Realisierung beginnt. Thilo Ostiem hat ihm dafür Material zusammen gesucht, anhand dessen die Modellierungstechnik erläutert werden soll. Die Methode der Modellierung, die sich durchgesetzt hat, ist das sogenannte Entity-Relationship-Modell (ERM). Damit Thilo Ostiem beginnen kann, müssen die einzelnen Elemente der Notation genauer betrachtet werden.</p>
+<p><img alt="Zeichenmaterial" src="bilder/kap_03_handlungssit_zeichnen.jpg" /></p>
+<hr />
+<h2 id="arbeitsauftrag-a30-beschreiben-eines-er-diagrammes">Arbeitsauftrag A|3.0: Beschreiben eines ER-Diagrammes</h2>
+<p>Ein Restaurant möchte eine bestehende Datenbank erweitern. Bisher sind einige Sachverhalte für die Vorratshaltung abgebildet:</p>
+<ul>
+<li>Ein Rezept hat mehrere Zutaten.</li>
+<li>Eine Zutat kann in mehreren Rezepten verwendet werden.</li>
+<li>Eine Zutat stammt immer genau aus einem Lagerort.</li>
+<li>Lagerorte werden für mehrere Zutaten genutzt.</li>
+</ul>
+<p>So kann in dem Restaurant bisher folgendes dargestellt werden:</p>
+<ul>
+<li>Für den hauseigenen Vollkorn-Pizzateig werden Weizenmehl, Vollkornmehl, frische Hefe, Salz, Zucker, Olivenöl und Wasser benötigt.</li>
+<li>Vollkornmehl, Weizenmehl, Salz und Zucker werden im Trockenlager bevorratet.</li>
+<li>Frische Hefe muss in den Kühlschrank.</li>
+<li>Olivenöl ist im Flaschenlager zu finden.</li>
+<li>Eine Zutat hat eine Maßeinheit, bspw. wird Weizenmehl in Gramm (g) angegeben.</li>
+<li>Rezepte haben einen Namen, der auf der Karte ausgewiesen wird.</li>
+<li>...</li>
+</ul>
+<p>Beschreiben Sie mit eigenen Worten den Aufbau eines ER-Diagramms immer in Bezug auf das Beispiel:</p>
+<p><img alt="Beispiel Rezept-Datenbank-ERM" src="bilder/kap_03_a30.png" /></p>
+<ol>
+<li>Was sind Entitäten?</li>
+<li>Was sind Attribute?</li>
+<li>Was sind Beziehungen?</li>
+<li>Was sind Kardinalitäten?</li>
+<li>Was bedeuten die im Beispiel eingesetzten Kardinalitäten in dem Fall?</li>
+<li>Welche Aufgabe hat der Primärschlüssel?</li>
+<li>Welche Aufgabe hat der Fremdschlüssel?</li>
+<li>Was ist referenzielle Integrität?</li>
+</ol>
+<hr />
+<h2 id="arbeitsauftrag-a31-beziehungstypen">Arbeitsauftrag A|3.1: Beziehungstypen</h2>
+<p>Greifen wir noch einmal das folgende Beispiel auf:</p>
+<p><img alt="Beispiel Rezept-Datenbank-ERM" src="bilder/kap_03_a30.png" /></p>
+<p>Erläutern Sie, was genau die n:m-Beziehung darstellt.
+Warum wird bei der n:m-Beziehung die Beziehungsentität benötigt?
+Auf welcher Seite steht in einer 1:n-Beziehung der Fremdschlüssel?</p>
+<hr />
+<h2 id="informationsmaterial-m30-grundlagen-des-entity-relationship-modells-erm">Informationsmaterial M|3.0: Grundlagen des Entity-Relationship-Modells (ERM)</h2>
+<h3 id="grundlagen-software">Grundlagen &amp; Software</h3>
+<p>Das Entity-Relationship-Modell, kurz ERM, ist ein einfaches Modell für den Entwurf von Datenbanken. Die deutsche Übersetzung des Begriffes lautet in etwa: Gegenstand-Beziehung-Modell. Das ERM besteht aus einer Abbildung, dem ER-Diagramm (kurz auch ERD genannt). Die darin verwendeten Elemente enthalten eine Beschreibung.</p>
+<p><img alt="ERM Beispiel Autor" src="bilder/kap_03_m30_erm.JPG" /></p>
+<p>Ein erster Entwurf kann entweder handschriftlich oder mit einem Computerprogramm erfolgen. Einige Softwarevorschläge sind bspw.:</p>
+<ul>
+<li><a href="https://www.yworks.com/downloads#yEd">yEd - Graph Editor - yWorks</a> (für Einsteiger &amp; Fortgeschrittene; erfüllt die im Unterricht verwendete Notation voll)</li>
+<li><a href="https://www.mysql.com/de/products/workbench/">MySQL Workbench</a> (tendenziell eher für Fortgeschrittene; erfüllt die im Unterricht verwendete Notation teilweise)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Hinweis</p>
+<p>Sie müssen hinsichtlich der IHK-Prüfungen und Klausuren unbedingt in der Lage sein, ER-Diagramme auch auf Papier zu zeichnen. Das mag zwar etwas komisch klingen, aber der Schwierigkeitsgrad ist aufgrund mangelnder Verschiebemöglichkeiten bedeutend höher und sollte zwingend ebenfalls geübt werden.</p>
+</div>
+<p>Bei dem Aufbau eines ER-Modells bzw. des daraus resultierenden ER-Diagrammes sind unterschiedliche Darstellungsformen in Gebrauch. Die bekannteste Form stellt die sogenannte Chen-Notation von Peter Chen dar. Chen gilt als Entwickler der ER-Diagramme. Die grundlegenden Elemente werden im Folgenden erklärt.</p>
+<h3 id="entitat-entity">Entität (Entity)</h3>
+<p>Als Entität wird ein eindeutig bestimmbares Objekt bezeichnet. Über dieses Objekt sollen Informationen (z.B. Attribute) gespeichert oder verarbeitet werden.</p>
+<p>Eine Entität wird im ER-Diagramm als Rechteck dargestellt und grundsätzlich im Singular beschrieben.</p>
+<p><img alt="ERM Beispiel" src="bilder/kap_03_m30_entity.JPG" /></p>
+<p>Beispiele: Artikel, Lieferer, Kunde, Person, Autor, Dokument usw.</p>
+<h3 id="attribut">Attribut</h3>
+<p>Ein Attribut ist ein Merkmal bzw. Kennzeichen eines Objektes, also einer Entität. Jede Entität kann beliebig viele Attribute besitzen. Das Wort Attribut lässt sich auch als Eigenschaft bezeichnen.</p>
+<p>Ein Attribut wird im ER-Diagramm als Ellipse dargestellt. Die Attribute werden mit ungerichteten Kanten zu den Entitäten verbunden.</p>
+<p><img alt="ERM Beispiel" src="bilder/kap_03_m30_attrib.JPG" /></p>
+<p>Beispiele: Artikelnummer, Name, Ort, Datum, Menge usw.</p>
+<p>Während z.B. das Attribut "Ort" eine Eigenschaft einer Entität darstellt, sind "Hannover" oder "Oldenburg" konkrete Attributwerte. In ER-Diagrammen werden stets nur Attribute und nicht Attributwerte benutzt.</p>
+<h3 id="beziehung-relationship">Beziehung (Relationship)</h3>
+<p>Als Relationship oder Relation bezeichnet man die Beziehung zwischen zwei Objekten (Entitäten). Durch die Nutzung von Relationships sollen im Datenbankentwurf Sachverhalte zwischen zwei Objekten dargestellt werden.</p>
+<p>Eine Beziehung wird im ER-Diagramm als Raute dargestellt. Diese verbindet mit Linien zwei Entitäten.</p>
+<p><img alt="ERM Beispiel" src="bilder/kap_03_m30_rel.JPG" /></p>
+<p>In den vorherigen Beispiel werden die Entitäten "Autor" und "Pressetext" durch die Entität "schreibt" in Beziehung gesetzt: "Autor schreibt einen Pressetext" oder anders herum "Ein Pressetext hat einen Autor". Hieraus wird auch der kleinste Standard deutlich, denn das Wort "hat" passt i.d.R. in die Beziehung. Es sollte aber ein möglichst treffendes Verb benutzt werden.</p>
+<p>Weitere Beispiele sind: Lieferer liefert Artikel, Kunde bestellt Artikel, Schüler besucht Klasse.</p>
+<p>Einfache Diagramme können bereits nur mit Entitäten, Attributen und Relationships entworfen werden. Für eine genauere Planung fehlen aber noch ein paar Elemente.</p>
+<h3 id="primarschlussel-primary-key">Primärschlüssel (Primary Key)</h3>
+<p>Ein Primärschlüssel wird verwendet, um einen Datensatz eindeutig zu identifizieren. Ein Schlüsselfeld bedient sich dabei eines Attributs.</p>
+<p>Ein Schlüsselfeld wird durch ein Attribut (Ellipse) dargestellt. Der Text ist dabei im Gegensatz zu weiteren Attributen unterstrichen.</p>
+<p><img alt="ERM Beispiel" src="bilder/kap_03_m30_pk.JPG" /></p>
+<p>Beispiele: Autoren Nr., Pressetext Nr, Kundennummer, Personalnummer</p>
+<h3 id="kardinalitaten-cardinalities">Kardinalitäten (Cardinalities)</h3>
+<p>Kardinalitäten stellen Mengenangaben dar. Durch Kardinalitäten wird beschrieben, in welchem "Mengenverhältnis" zwei Entitäten in Beziehung zueinander stehen können. Dazu werden mathematische Mengenangaben genutzt (z.B. 1 oder n = beliebig viele).</p>
+<p><img alt="ERM Beispiel" src="bilder/kap_03_m30_kard.JPG" /></p>
+<p>Beispiel (1:n): Ein Autor (1) schreibt (n) beliebig viele Pressetexte.</p>
+<p>Beispiel (1:1): Ein Ehemann (1) hat (1) genau eine Ehefrau und umgekehrt.</p>
+<hr />
+<h2 id="informationsmaterial-m31-schlusselattribute">Informationsmaterial M|3.1: Schlüsselattribute</h2>
+<h3 id="primarschlussel">Primärschlüssel</h3>
+<p>Wie bereits im vorherigen Informationsmaterial beschrieben ist, nehmen Primärschlüssel(-felder) in Datenbanken eine sehr wichtige Funktion ein. Alle Tabellen benötigen einen sogenannten Primärschlüssel.</p>
+<p>Jeder einzelne Datensatz wird dabei durch einen Primärschlüssel beschrieben. Durch die Vergabe von Primärschlüsseln können z.B. Verwechslungen ausgeschlossen werden. Zum Beispiel existieren in Deutschland mehrere Personen mit dem gleichen Namen und Geburtsdatum (z.B. Tim Jansen, geboren am 19.12.1980). Durch die Vergabe von Primärschlüsseln, z.B. einer Personal- oder Sozialversicherungsnummer, können die einzelnen Datensätze ohne Verwechslung unterschieden werden. Ein Primärschlüssel kann dabei aus Ziffern, Buchstaben oder Kombinationen (alphanumerisch) gebildet werden. Entscheidend ist, dass ein Primärschlüssel einzigartig ist, z.B. durch Vergabe einer durchlaufenden Nummer, und er sich niemals ändert. Ein Kunde eines Unternehmens erhält z.B. für die Dauer der Geschäftsbeziehungen eine einzigartige Kundennummer. Mithilfe von Primärschlüsseln können auch Beziehungen zwischen Tabellen in einer Datenbank hergestellt werden.</p>
+<p>Erst durch einen Primärschlüssel ist eine Beziehung (Relation) zwischen zwei Tabellen möglich.</p>
+<p>Beispiel: Nachfolgend wird eine Pressetext-Nr. als Primärschlüssel verwendet. In diesem Fall setzt sich die Nummer aus Teilen des Datums und einer fortlaufenden Nummer zusammen:</p>
+<p><img alt="Tabelle PK" src="bilder/kap_03_m31_tabelle.JPG" /></p>
+<p>Primärschlüssel können, wie in dem vorhergehenden Beispiel, entweder selbst generiert werden, oder man greift auf bereits "bestehende" Primärschlüssel zurück. Eine Buchhandlung kann sich z.B. der ISBN-Nummer bedienen. Bei einem Supermarkt bietet sich die EAN (die Nummer, die der Barcode darstellt) für die geführten Artikel an.</p>
+<p>Die folgenden Schlüsselarten lassen sich bei einem Datenbankentwurf unterschieden.</p>
+<h4 id="naturlicher-primarschlussel">Natürlicher Primärschlüssel</h4>
+<p>Als natürlichen Primärschlüssel können alle Schlüssel verstanden werden, die bereits durch ein Objekt (Entität) gegeben sind.</p>
+<p>Ein Buchgeschäft kann z.B. die ISBN eines Werkes einfach in die eigene Datenbank übernehmen oder ein Vermieter von E-Bikes übernimmt die Seriennummer der Fahrzeuge.</p>
+<h4 id="kunstlicher-primarschlussel">Künstlicher Primärschlüssel</h4>
+<p>Künstliche Primärschlüssel werden oft vergeben, wenn kein natürlicher Schlüssel vorliegt oder übernommen werden soll. Künstliche Primärschlüssel werden bei dem Anlegen der Datenbank festgelegt.</p>
+<p>Beispiele: Ein Unternehmen vergibt Kundennummern, um seine Kunden eindeutig voneinander zu unterscheiden.</p>
+<h4 id="zusammengesetzter-primarschlussel">Zusammengesetzter Primärschlüssel</h4>
+<p>Ein zusammengesetzter Primärschlüssel ist ein Schlüssel, der durch die Kombination von verschiednenen Attributen erzeugt wird. In der Praxis kann ein zusammengesetzter Primärschlüssel zu Problemen führen. Bei einer Rechnung könnte der Primärschlüssel z.B. aus dem Datum und der Kundennummer erzeugt werden. Falls ein Kunde zwei Rechnungen an einem tag ausgestellt bekommen würde, wäre ein Schlüssel doppelt vergeben. Ein "reiner" zusammengesetzter Primärschlüssel ist daher selten anzutreffen. Entweder wird dieser um einen künstlichen Primärschlüssel ergänzt (z.B. eine fortlaufende Nummer) oder ersetzt.</p>
+<h3 id="fremdschlussel">Fremdschlüssel</h3>
+<p>Ein Fremdschlüssel wird benötigt, um zwei Tabellen bzw. zwei Objekte miteinander zu verknüpfen. Was in der einen Tabelle ein Fremdschlüssel ist, ist in der anderen Tabelle ein Primärschlüssel. In einem ER-Diagramm wird der Fremdschlüssel gestrichelt umrandet (andere Notationen unterstreichen den Fremdschlüssel gestrichelt).</p>
+<p><img alt="Tabelle" src="bilder/kap_03_m31_erm.JPG" /></p>
+<p>Das abgebildete ERM kann als folgende Tabellen verstanden werden:</p>
+<p><img alt="Tabelle" src="bilder/kap_03_m31_tabelle2.JPG" /></p>
+<hr />
+<h2 id="informationsmaterial-m32-grundlagen-der-beziehungstypen-kardinalitaten">Informationsmaterial M|3.2: Grundlagen der Beziehungstypen / Kardinalitäten</h2>
+<p>Die Beziehung von Objekten (Entitäten) untereinander wird durch Kardinalitäten dargestellt. In einem ER-Diagramm kann somit dargestellt werden, wie viele Objekte mit einem anderen Objekt in Beziehung stehen können. Die Bestimmung und Festlegung von Beziehungstypen stellt eine wichtige Grundlage des Datenbankentwurfes dar.</p>
+<h3 id="1-zu-1-beziehung-11">1-zu-1-Beziehung (1:1)</h3>
+<p>Bei einer 1-zu-1-Beziehung steht jede Entität des einen Entitätstyps mit einer Entität des anderen Entitätstyps in Beziehung und andersherum. 1-zu-1-Beziehungen sind relativ selten, da schnell Ausnahmen entstehen können.</p>
+<p>Beispiel: Eine Frau ist mit genau einem Mann verheiratet. Die Darstellung in einem ER-Diagramm ist wie folgt:</p>
+<p><img alt="1zu1 Beziehung" src="bilder/kap_03_m32_1zu1.JPG" /></p>
+<p>Ein weiteres Beispiel: Ein Schiff hat genau ein Schiffskennzeichen.</p>
+<p>Die Zuordnung des Fremdschlüssels in der 1:1-Beziehung ist in beiden Tabellen möglich. Manchmal erscheint eine Tabelle logischer, als die andere; dies ist fallabhängig.</p>
+<h3 id="1-zu-n-beziehung-1n">1-zu-n-Beziehung (1:n)</h3>
+<p>Die 1-zu-n-Beziehung ist die häufigste Kardinalität. Eine einzelne Entität des einen Entitätstyps steht dabei mit mehreren Entitäten eines anderen Entitätstyps in Beziehung. Sofern keine 1-zu-1-Beziehung vorhanden ist, wird bei einem Datenbankentwurf angestrebt, eine 1-zu-n-Beziehung herzustellen.</p>
+<p>Beispiel: In der Tabelle aus den vorherigen Beispielen hat ein Pressetext z.B. immer genau einen Autor. Ein Autor kann aber mehrere Pressetexte verfassen. Die Darstellung in einem ER-Diagramm ist wie folgt:</p>
+<p><img alt="1zuN Beziehung" src="bilder/kap_03_m32_1zuN.JPG" /></p>
+<p>Ein weiteres Beispiel: Eine Abteilung besteht aus mehreren Mitarbeitern. Jeder Mitarbeiter ist genau einer Abteilung zugeordnet.</p>
+<p>Der Fremdschlüssel wird bei der 1:n-Beziehung immer auf der n-Seite hinzugefügt.</p>
+<h3 id="n-zu-m-beziehung-nm">n-zu-m-Beziehung (n:m)</h3>
+<p>Jede Entität eines Entitätstyps steht mit beliebig vielen Entitäten des anderen Entitätstyps in Beziehung. Ebenso verhält es sich umgekehrt. Ein naheliegendes Beispiel sind Mitarbeiter und Projekte. Während ein Mitarbeiter an mehreren Projekten arbeiten kann, sind in einem Projekt auch mehrere Mitarbeiter beschäftigt. Dieses Beispiel würde wie folgt in einem ER-Diagramm dargestellt werden:</p>
+<p><img alt="NzuM Beziehung" src="bilder/kap_03_m32_NzuM_1.JPG" /></p>
+<p>In der Praxis sind n-zu-m-Beziehungen in Datenbanken schwierig zu handhaben, genau genommen müsste die Darstellung mit einer Beziehungsentität gewählt werden. Diese wird als Doppel-Raute dargestellt. In manchen ER-Diagrammen findet man auch Darstellungen mit einer Raute in einem Rechteck (also der Mischung der Symbole von Entität und Beziehung). Das Beispiel sähe dann als Beziehungsentität wie folgt aus:</p>
+<p><img alt="NzuM Beziehung" src="bilder/kap_03_m32_NzuM_2.JPG" /></p>
+<p>Werden im Beispiel die Primär- und Fremdschlüssel ergänzt erhalten wir folgende Darstellung:</p>
+<p><img alt="NzuM Beziehung" src="bilder/kap_03_m32_NzuM_3.JPG" /></p>
+<p>Eine Umsetzung in den Datenbanksprachen ist entgegen der ER-Diagramme nicht möglich. Dies liegt daran, dass Werte immer atomar abgespeichert werden müssen. Also könnten in einer Zelle in der Tabelle nicht mehrere Angaben gemacht werden. Es könnten z.B. Redundanzen und Inkonsistenzen auftreten. Man bedient sich daher eines Tricks: einer zusätzlichen Tabelle. Im Beispiel wird aus der Beziehung arbeitet in die Tabelle / Beziehungsentität arbeitet_in geschaffen. Hierbei stehen Mitarbeiter und arbeitet_in im Verhältnis 1:n. andererseits stehen arbeitet_in und Projekt ebenfalls im Verhältnis 1:n.</p>
+<p>Bei einer Beziehungsentität wird ein neuer Primärschlüssel mit dem Namen der vorherigen Beziehung gebildet. Diesem werden jeweils die Fremdschlüssel beider angeschlossener Tabellen zugeordnet.</p>
+<hr />
+<h2 id="kompetenz-31-er-diagramme-erstellen">Kompetenz 3.1: ER-Diagramme erstellen</h2>
+<p>Der Aufbau eines ERM ist nun bekannt, folgend soll ein näherer Blick auf die Beziehungstypen geworfen werden. Außerdem ist ein erstes ER-Diagramm zu erstellen.</p>
+<hr />
+<h3 id="arbeitsauftrag-a32-erm-beziehungstypen">Arbeitsauftrag A|3.2: ERM - Beziehungstypen</h3>
+<p>Interaktives Element im Moodle-Kurs</p>
+<hr />
+<h3 id="arbeitsauftrag-a33-das-erste-er-diagramm">Arbeitsauftrag A|3.3: Das erste ER-Diagramm</h3>
+<p>Im Rahmen Ihrer Tätigkeit in der Bertram System Electronics GmbH &amp; Co. KG erstellen Sie Datenbanken für verschiedene Kunden. Einer der Großkunden ist der Hannover Airport mit vielen verschiedenen Subunternehmen und Airlines. Die AirHannover hat Ihnen folgende Fakten übermittelt und bittet Sie, hierzu das entsprechende ERM zu erstellen:</p>
+<ul>
+<li>Das Personal der Fluggesellschaft AirHannover hat einen Nachnamen und einen Vornamen.</li>
+<li>Jedes Personalmitglied bekleidet genau einen Dienstrang, der sich durch eine Bezeichnung und eine Gehaltsklasse auszeichnet.</li>
+<li>Ein Dienstrang kann von mehreren Personalmitgliedern bekleidet werden.</li>
+<li>Jedes Personalmitglied begleitet mehrere Reisen, die durch einen ReisePK und ein Datum beschrieben werden.</li>
+<li>Eine Reise wird von mehreren Personalmitgliedern begleitet.</li>
+</ul>
+<p><strong>Aufgaben:</strong></p>
+<ol>
+<li>Erstellen Sie das ERM.</li>
+<li>Ergänzen Sie falls nötig Schlüsselattribute.</li>
+<li>Erstellen Sie das Datenbankschema in Kurzschreibweise.</li>
+</ol>
+<hr />
+<h2 id="informationsmaterial-m33-kurzschreibweise">Informationsmaterial M|3.3: Kurzschreibweise</h2>
+<p>Die Kurzschreibweise zu einer Datenbank ist der zweite Modellierungsschritt. Da in den ER-Diagrammen in der Regel nur die Schlüsselattribute (PK &amp; FK) eingetragen werden, sollen in der Kurzschreibweise auch die normalen Attribute betrachtet werden.</p>
+<p><img alt="" src="bilder/kap_03_m33_erm.png" /></p>
+<p>Die Kurzschreibweise zum oben genannten Beispiel sähe wie folgt aus*:</p>
+<p>tbl_rezept(<u>rezeptPK</u>, bezeichnung)<br />
+tbl_beinhaltet(<u>beinhaltetPK</u>, <em>rezeptFK</em>, <em>zutatFK</em>, menge)<br />
+tbl_zutat(<u>zutatPK</u>, <em>lagerortFK</em>, masseinheit, menge, bezeichnung)<br />
+tbl_lagerort(<u>lagerortPK</u>, bezeichnung, temperatur)</p>
+<p>(*) der FK wird, wenn die Kurzschreibweise per Hand geschrieben wird, gestrichelt unterstrichen.</p>
+<hr />
+<h2 id="informationsmaterial-m34-erm-konventionen">Informationsmaterial M|3.4: ERM-Konventionen</h2>
+<h3 id="entitat">Entität</h3>
+<ul>
+<li>Darstellungsform: Rechteck</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+</ul>
+<h3 id="attribut_1">Attribut</h3>
+<ul>
+<li>Darstellungsform: Ellipse</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+</ul>
+<h3 id="primarschlusselattribute">Primärschlüsselattribute</h3>
+<ul>
+<li>Darstellungsform: Ellipse, Attributname unterstrichen</li>
+<li>Attributname lautet wie die Entität mit angehängtem "PK"</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+</ul>
+<h3 id="fremdschlusselattribute">Fremdschlüsselattribute</h3>
+<ul>
+<li>Darstellungsform: gestrichelte Ellipse oder Ellipse mit gestrichelt unterstrichenem Attributnamen</li>
+<li>Attributname lautet wie die Entität, auf die sich der Name bezieht mit angehängtem "FK"</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+</ul>
+<h3 id="beziehungen">Beziehungen</h3>
+<ul>
+<li>Darstellungsform: Raute</li>
+<li>Kardinalitäten gerne in die Nähe der Raute schreiben</li>
+<li>Kanten der Beziehungen immer parallel zum Seitenrand, nicht quer/diagonal zeichnen</li>
+<li>möglichst treffend benennen, aber "hat" funktioniert immer</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+<li>bei mehreren Worten ggf. mit Unterstrichen "_" teilen (z.B. <code>gehoert_zu</code>)</li>
+</ul>
+<h2 id="beziehungsentitaten">Beziehungsentitäten</h2>
+<ul>
+<li>Darstellungsform: Doppelte Raute oder Rechteck, das eine Raute umzeichnet</li>
+<li>möglichst treffend benennen, hier "hat" vermeiden</li>
+<li>im Singular</li>
+<li>klein geschrieben</li>
+<li>keine Umlaute/Sonderzeichen/Leerzeichen</li>
+<li>bei mehreren Worten ggf. mit Unterstrichen "_" teilen (z.B. <code>gehoert_zu</code>)</li>
+</ul>
+<hr />
+<h2 id="kompetenz-32-prozess-der-normalisierung-berucksichtigen">Kompetenz 3.2: Prozess der Normalisierung berücksichtigen</h2>
+<p>Thilo Ostiem hat Matthias Thale bereits viel weitergeholfen, sodass erste ER-Diagramme entstanden sind. Zwischen den Recherchen zu Datenbanken fällt nun Matthias Thale ein Ausdruck des Außendienstes in die Hände. Hierauf wurden potenzielle Neukunden erfasst. Diese Daten möchte er nun so aufbereiten, dass sie in eine Datenbank eingetragen werden können.</p>
+<p>Dabei ist ihm klar: es dürfen keine Daten redundant eingetragen werden oder Widersprüche auftauchen. Er bekommt den Tipp von Thilo Ostiem, sich einmal das Themengebiet der "Normalisierung" anzusehen.</p>
+<p><img alt="Monitor Icons" src="bilder/kap_03_handlungssit_icons.jpg" /></p>
+<hr />
+<h3 id="arbeitsauftrag-a34-tabellen-beurteilen">Arbeitsauftrag A|3.4: Tabellen beurteilen</h3>
+<p>Beurteilen Sie die vorliegende Tabelle (s.u.). Welche Probleme könnten sich bei der Erfassung der vorliegenden Tabelle in einer Datenbank ergeben?</p>
+<p>Stellen Sie erste Verbesserungsvorschläge für die abgebildete Tabelle zusammen.</p>
+<p><img alt="Tabelle" src="bilder/kap_03_a34.JPG" /></p>
+<hr />
+<h3 id="arbeitsauftrag-a35-prozess-zur-normalisierung">Arbeitsauftrag A|3.5: Prozess zur Normalisierung</h3>
+<ol>
+<li>Erläutern Sie die Problematik in Datenbanken, wenn Redundanzen auftreten sollten. Nennen Sie Beispiele.</li>
+<li>Beschreiben Sie in eigenen Worten die Notwendigkeit der Normalisierung einer Tabelle.</li>
+<li>Zählen Sie in Stichpunkten die Kriterien auf, die notwendig für das Erreichen der ersten, der zweiten bzw. der dritten Normalform sind.</li>
+</ol>
+<hr />
+<h2 id="informationsmaterial-m35-normalisierung-einer-datenbank">Informationsmaterial M|3.5: Normalisierung einer Datenbank</h2>
+<h4 id="redundanzen-notwendigkeit-einer-normalisierung">Redundanzen / Notwendigkeit einer Normalisierung</h4>
+<p>Wie bereits bekannt, ist es eine Grundregel, Redundanzen in Datenbanken zu vermeiden. Gleiche Inhalte dürfen somit nicht in mehreren Datenfeldern vorkommen. Ein Datenfeld darf außerdem nur einen einzigen Eintrag enthalten.</p>
+<p>Beispiel: Statt dem Datenfeld "Name" werden die Felder "Vorname" und "Nachname" angelegt.</p>
+<p>Liegen "Verstöße" gegen diese Grundregel vor, müssen diese Daten in Normalform gebracht werden. Diesen Prozess nennt man auch Normalisierung.</p>
+<p>In der Regel wird dazu eine schrittweise Vorgehensweise angewandt, sofern die Daten nicht bereits in geeigneter Form vorliegen. Unnormalisierte Tabellen wie in der Ausgangssituation werden auch als nullte Normalform bezeichnet. Die Tabellen einer relationalen Datenbank werden zuerst in die erste Normalform, dann in die zweite Normalform und letztendlich in die dritte Normalform gebracht. Erst Tabellen, die sich in der dritten Normalform befinden, eignen sich für die Verwendung in einer relationalen Datenbank.</p>
+<h4 id="erste-normalform">Erste Normalform</h4>
+<p>Die erste Normalform besagt, dass kein Datenfeld mehrfach in einer Tabelle vorkommen darf. Mehrfach enthaltene Datenfelder werden aus der Tabelle entfernt.</p>
+<p>Tabelle in der nullten Normalform:</p>
+<p><img alt="0. NF" src="bilder/kap_03_m35_0nf.JPG" /></p>
+<p>Tabelle in der ersten Normalform:</p>
+<p><img alt="1. NF" src="bilder/kap_03_m35_1nf.JPG" /></p>
+<h4 id="zweite-normalform">Zweite Normalform</h4>
+<p>Für die zweite Normalform muss zunächst die erste Normalform erfüllt sein. Jedes Datenfeld eines Datensatzes, das selbst kein Schlüssel ist, muss vom Schlüsselfeld abhängen.</p>
+<p>In unserem Beispiel wurde noch kein Schlüsselfeld vergeben. An dieser Stelle bietet sich eine Vergabe eines künstlichen Primärschlüssels an. Die potenziellen Kunden erhalten eine Kundennummer. Alle weiteren Datenfelder bzw. Attribute (z.B. Straße, Ort etc.) sind vom Schlüsselfeld abhängig und können so bestehen bleiben.</p>
+<p>Tabelle in der zweiten Normalform:</p>
+<p><img alt="2. NF" src="bilder/kap_03_m35_2nf.JPG" /></p>
+<p>Bei der Vergabe von Primärschlüsseln wird deutlich, dass die letzten Einträge doppelt angelegt wurden, also redundant sind. Redundanzen werden spätestens an dieser Stelle eliminiert.</p>
+<h4 id="dritte-normalform">Dritte Normalform</h4>
+<p>Für die dritte Normalform muss die (erste und) zweite Normalform erfüllt sein. Darüber hinaus darf jedes Datenfeld eines Datensatzes, das kein Schlüssel (-feld) ist, nur vom Schlüsselfeld und nicht von anderen Feldern eines Datensatzes abhängig sein.</p>
+<p>Somit dürfen keine Abhängigkeiten zwischen weiteren Feldern eines Datensatzes bestehen. Ist dies der Fall, wird eine weitere Tabelle angelegt.</p>
+<p>Tabelle in der dritten Normalform:</p>
+<p><img alt="3. NF" src="bilder/kap_03_m35_3nf.JPG" /></p>
+<p>In dem Beispiel wird deutlich, dass eine Abhängigkeit zwischen Ort und Postleitzahl besteht und somit ein Verstoß gegen die dritte Normalform vorliegt. Um diese Abhängigkeit aufzulösen, wird eine zweite Tabelle, ein "PLZ-Verzeichnis", angelegt. Die Postleitzahl fungiert hierbei als natürlicher Primärschlüssel. Über die Abfrage der PLZ kann nun automatisch der zugehörige Ort angezeigt werden.</p>
+<div class="admonition note">
+<p class="admonition-title">Zusätzliches Material, weitere Übungen &amp; Tipps</p>
+<p>Die folgenden Übungen und Tipps &amp; Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br><em>Ich kann, weil ich will, was ich muss! (Immanuel Kant)</em></p>
+</div>
+<h2 id="zusatzmaterial">Zusatzmaterial</h2>
+<p>// TODO Links einfügen</p>
+<!-- BEGIN INCLUDE inhalte/lizenzhinweis.md '&lt;!--include-start--&gt;' '&lt;!--include-end--&gt;' -->
+
+<div class="admonition info">
+<p class="admonition-title">Lizenz</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Der PV-DB-Kurs</span> von <a xmlns:cc="http://creativecommons.org/ns#" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/" property="cc:attributionName" rel="cc:attributionURL"> Oliver Schwenke &amp; André Neumann</a> ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Fragen, Hinweise etc. an neumann@mmbbs.de.</p>
+</div>
+<!-- END INCLUDE -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ce72ebac.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,946 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/kapitel_02.html">
+      
+      
+        <link rel="prev" href="kapitel_01.html">
+      
+      
+        <link rel="next" href="kapitel_03.html">
+      
+      <link rel="icon" href="bilder/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+    
+    
+      
+        <title>Kapitel 02 - Grundlagen Datenhaltung - KIT Prüfungsvorbereitung Datenbanken</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kapitel-2-grundlagen-der-datenhaltung-in-anwendungen" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-header__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KIT Prüfungsvorbereitung Datenbanken
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kapitel 02 - Grundlagen Datenhaltung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-nav__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    KIT Prüfungsvorbereitung Datenbanken
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Informationen zum Kurs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_01.html" class="md-nav__link">
+        Kapitel 01 - Modellunternehmen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kapitel 02 - Grundlagen Datenhaltung
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="kapitel_02.html" class="md-nav__link md-nav__link--active">
+        Kapitel 02 - Grundlagen Datenhaltung
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-20-grundlagen-der-objektorientierten-programmierung-oop-analysieren" class="md-nav__link">
+    Kompetenz 2.0: Grundlagen der objektorientierten Programmierung (OOP) analysieren
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a20-was-ist-die-objektorientierte-programmierung" class="md-nav__link">
+    Arbeitsauftrag A|2.0: Was ist die Objektorientierte Programmierung?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m20-uberblick-der-anwendungsentwicklung" class="md-nav__link">
+    Informationsmaterial M|2.0: Überblick der Anwendungsentwicklung
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.0: Überblick der Anwendungsentwicklung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objektorientierung" class="md-nav__link">
+    Objektorientierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#klassifikation-spezialisierung-generalisierung" class="md-nav__link">
+    Klassifikation, Spezialisierung &amp; Generalisierung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a21-funktionalitat-und-datenhaltung-in-klassen-und-objekten" class="md-nav__link">
+    Arbeitsauftrag A|2.1: Funktionalität und Datenhaltung in Klassen und Objekten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m21-uml-klassendiagramm" class="md-nav__link">
+    Informationsmaterial M|2.1: UML-Klassendiagramm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-21-grundlagen-und-vorteile-der-datenbanken-erkennen" class="md-nav__link">
+    Kompetenz 2.1: Grundlagen und Vorteile der Datenbanken erkennen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a22-was-ist-eine-datenbank" class="md-nav__link">
+    Arbeitsauftrag A|2.2: Was ist eine Datenbank?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m22-aufbau-einer-relationalen-datenbank" class="md-nav__link">
+    Informationsmaterial M|2.2: Aufbau einer relationalen Datenbank
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.2: Aufbau einer relationalen Datenbank">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vorteile-von-datenbanken-sind-unter-anderem" class="md-nav__link">
+    Vorteile von Datenbanken sind unter anderem:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verbreitete-datenbankprogramme" class="md-nav__link">
+    Verbreitete Datenbankprogramme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a23-einsatzgebiete-fur-datenbanken" class="md-nav__link">
+    Arbeitsauftrag A|2.3: Einsatzgebiete für Datenbanken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a24-grundlagen-zu-datenbanken" class="md-nav__link">
+    Arbeitsauftrag A|2.4: Grundlagen zu Datenbanken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m24-grundregeln-von-datenbanken" class="md-nav__link">
+    Informationsmaterial M|2.4: Grundregeln von Datenbanken
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.4: Grundregeln von Datenbanken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keine-redundanzen" class="md-nav__link">
+    Keine Redundanzen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eindeutigkeit-von-datensatzen-durch-schlusselattribute" class="md-nav__link">
+    Eindeutigkeit von Datensätzen durch Schlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keine-prozessdaten" class="md-nav__link">
+    Keine Prozessdaten
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-22-datenbank-lebenszyklus-berucksichtigen" class="md-nav__link">
+    Kompetenz 2.2: Datenbank-Lebenszyklus berücksichtigen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a25-datenbank-lebenszyklus" class="md-nav__link">
+    Arbeitsauftrag A|2.5: Datenbank-Lebenszyklus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m25-datenbank-lebenszyklus" class="md-nav__link">
+    Informationsmaterial M|2.5: Datenbank-Lebenszyklus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_03.html" class="md-nav__link">
+        Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_04.html" class="md-nav__link">
+        Kapitel 04 - Entwurf von Datenbanken für MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_05.html" class="md-nav__link">
+        Kapitel 05 - Realisierung einer Datenbank mit MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_06.html" class="md-nav__link">
+        Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-20-grundlagen-der-objektorientierten-programmierung-oop-analysieren" class="md-nav__link">
+    Kompetenz 2.0: Grundlagen der objektorientierten Programmierung (OOP) analysieren
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a20-was-ist-die-objektorientierte-programmierung" class="md-nav__link">
+    Arbeitsauftrag A|2.0: Was ist die Objektorientierte Programmierung?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m20-uberblick-der-anwendungsentwicklung" class="md-nav__link">
+    Informationsmaterial M|2.0: Überblick der Anwendungsentwicklung
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.0: Überblick der Anwendungsentwicklung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objektorientierung" class="md-nav__link">
+    Objektorientierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#klassifikation-spezialisierung-generalisierung" class="md-nav__link">
+    Klassifikation, Spezialisierung &amp; Generalisierung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a21-funktionalitat-und-datenhaltung-in-klassen-und-objekten" class="md-nav__link">
+    Arbeitsauftrag A|2.1: Funktionalität und Datenhaltung in Klassen und Objekten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m21-uml-klassendiagramm" class="md-nav__link">
+    Informationsmaterial M|2.1: UML-Klassendiagramm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-21-grundlagen-und-vorteile-der-datenbanken-erkennen" class="md-nav__link">
+    Kompetenz 2.1: Grundlagen und Vorteile der Datenbanken erkennen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a22-was-ist-eine-datenbank" class="md-nav__link">
+    Arbeitsauftrag A|2.2: Was ist eine Datenbank?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m22-aufbau-einer-relationalen-datenbank" class="md-nav__link">
+    Informationsmaterial M|2.2: Aufbau einer relationalen Datenbank
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.2: Aufbau einer relationalen Datenbank">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vorteile-von-datenbanken-sind-unter-anderem" class="md-nav__link">
+    Vorteile von Datenbanken sind unter anderem:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verbreitete-datenbankprogramme" class="md-nav__link">
+    Verbreitete Datenbankprogramme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a23-einsatzgebiete-fur-datenbanken" class="md-nav__link">
+    Arbeitsauftrag A|2.3: Einsatzgebiete für Datenbanken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a24-grundlagen-zu-datenbanken" class="md-nav__link">
+    Arbeitsauftrag A|2.4: Grundlagen zu Datenbanken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m24-grundregeln-von-datenbanken" class="md-nav__link">
+    Informationsmaterial M|2.4: Grundregeln von Datenbanken
+  </a>
+  
+    <nav class="md-nav" aria-label="Informationsmaterial M|2.4: Grundregeln von Datenbanken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keine-redundanzen" class="md-nav__link">
+    Keine Redundanzen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eindeutigkeit-von-datensatzen-durch-schlusselattribute" class="md-nav__link">
+    Eindeutigkeit von Datensätzen durch Schlüsselattribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keine-prozessdaten" class="md-nav__link">
+    Keine Prozessdaten
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-22-datenbank-lebenszyklus-berucksichtigen" class="md-nav__link">
+    Kompetenz 2.2: Datenbank-Lebenszyklus berücksichtigen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a25-datenbank-lebenszyklus" class="md-nav__link">
+    Arbeitsauftrag A|2.5: Datenbank-Lebenszyklus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informationsmaterial-m25-datenbank-lebenszyklus" class="md-nav__link">
+    Informationsmaterial M|2.5: Datenbank-Lebenszyklus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kapitel-2-grundlagen-der-datenhaltung-in-anwendungen">Kapitel 2: Grundlagen der Datenhaltung in Anwendungen</h1>
+<p><img alt="Kapitelbild" src="bilder/kap_02_kapitelbild.png" /></p>
+<p>In diesem Kapitel ...</p>
+<ul>
+<li>... informieren Sie sich grob über den Aufbau objektorientierter Anwendungen.</li>
+<li>... erarbeiten Sie sich die Grundlagen von Datenbanken.</li>
+<li>... erfahren Sie mehr zu Vorteilen von Datenbanken ggü. einer Tabellenkalkulation.</li>
+<li>... stellen Sie Grundprinzipien von Datenbanken zusammen.</li>
+</ul>
+<hr />
+<h2 id="kompetenz-20-grundlagen-der-objektorientierten-programmierung-oop-analysieren">Kompetenz 2.0: Grundlagen der objektorientierten Programmierung (OOP) analysieren</h2>
+<p>Matthias Thale ist langjähriger Mitarbeiter der BSE. Nachdem er im technischen Marketing jahrelang für die Auswahl von Hardwarekomponenten zuständig war, hatte er die Idee der ursprünglichen Verkaufsplattform. Nachdem Herr Thale seit 5 Jahren alleine die in einer Tabellenkalkulation organisierte Plattform verwaltete, muss er sich nun ein Jahr vor seinem Ruhestand um einen Nachfolger kümmern.</p>
+<p>Thilo Ostiem ist der designierte Leiter des Treuhandservices. Als er sich die Verwaltung der Käufer, Verkäufer und Artikel in der Tabellenkalkulation angesehen hatte, rauchte ihm sprichwörtlich der Kopf. So würde er nicht arbeiten können, das bedeutet einen unverhältnismäßigen Arbeitsaufwand für die Einarbeitung, aber auch für die gesamte Betreuung. Das Jahr für die Übergabe möchte Herr Ostiem sinnvoll nutzen und gemeinsam mit Herrn Thale ein modernes System einrichten. Dazu muss Herr Ostiem den Kollegen Thale erstmal von seiner Idee Überzeugen: das Programmieren einer Anwendung.</p>
+<p>Matthias Thale ist bereit, sein System in ein modernisiertes Programm zu überführen und mit seiner Erfahrung beizutragen. Dazu muss er aber wissen, wie das mit der Anwendung sowie deren Datenhaltung eigentlich funktioniert.</p>
+<p><img alt="Taschenrechner" src="bilder/kap_02_handlungssit_taschenrechner.jpg" /></p>
+<hr />
+<h2 id="arbeitsauftrag-a20-was-ist-die-objektorientierte-programmierung">Arbeitsauftrag A|2.0: Was ist die Objektorientierte Programmierung?</h2>
+<p>Lösen Sie die folgenden Aufgaben über das Informationsmaterial im Kurs:</p>
+<ol>
+<li>Was ist in der Anwendungsentwicklung ein Objekt?</li>
+<li>Was ist in der Anwendungsentwicklung eine Klasse?</li>
+</ol>
+<hr />
+<h2 id="informationsmaterial-m20-uberblick-der-anwendungsentwicklung">Informationsmaterial M|2.0: Überblick der Anwendungsentwicklung</h2>
+<h3 id="objektorientierung">Objektorientierung</h3>
+<p>Seit Mitte der 1980er-Jahre hat die Objektorientierung und damit auch die objektorientierte Modellierung immer mehr an Bedeutung gewonnen. Ein Objekt bezeichnet die Abbildung eines Gegenstandes der realen Welt, der innerhalb der Software verwendet wird. Dabei kann es sich sowohl um programmtechnische Gegenstände, z. B. ein Fenster einer grafischen Benutzeroberfläche, als auch um Gegenstände des zu unterstützenden Problembereichs, z. B. ein Konto des Rechnungswesens, handeln.</p>
+<p>Während die funktionsorientierte Softwareentwicklung primär auf die Algorithmen ausgerichtet ist und sich die datenorientierte Entwicklung auf die Datenelemente und ihre Beziehungen untereinander konzentriert, umfasst die Objektorientierung beide Aspekte: In einem Objekt werden die charakterisierenden Daten (Attribute) sowie die möglichen Funktionen (Methoden) eines Gegenstandes zusammengefasst. Die Inhalte der Attribute beschreiben den aktuellen Zustand des Objekts, die Methoden hingegen sein dynamisches Verhalten. Wird z. B. ein Konto als Objekt abgebildet, dann sind sowohl seine Attribute (Kontonummer, Saldo …) als auch die möglichen Funktionen (Buchen, Saldo ermitteln…) zu definieren, mit denen die Werte der Attribute manipuliert werden. Durch die gleichzeitige Betrachtung von Daten und Funktionen entfallen Zuordnungs- und Koordinationsaufgaben des Entwicklers bezüglich der Daten und den von ihnen getrennten und sie manipulierenden Funktionen.</p>
+<h3 id="klassifikation-spezialisierung-generalisierung">Klassifikation, Spezialisierung &amp; Generalisierung</h3>
+<p>Gleichartige Objekte, die durch die gleichen Attribute und Methoden gekennzeichnet sind, werden einer gemeinsamen Klasse zugeordnet (Klassifikation). Die Konten des betrieblichen Kontenrahmens gehören alle zur Klasse Konto, denn sie werden durch die gleiche Datenstruktur und die gleichen Methoden definiert. Die einzelnen Konten, die sich nur hinsichtlich des Inhaltes ihrer Datenfelder unterscheiden, werden als Instanzen der Klasse Konto bezeichnet.</p>
+<p>Über die Klassifikation hinaus kann die abzubildende Realität durch Spezialisierung und Generalisierung strukturiert werden:</p>
+<ul>
+<li>Die Spezialisierung bedeutet eine inhaltliche Verfeinerung einer Klasse zu mehreren davon abgeleiteten Unterklassen. Aus der Klasse Konto gehen durch Spezialisierung die Klassen Sachkonto und Finanzkonto hervor.</li>
+<li>Bei der Generalisierung wird in umgekehrter Richtung durch Abstraktion für mehrere Klassen eine übergeordnete Klasse gesucht.</li>
+</ul>
+<p>In beiden Fällen entsteht eine Klassenhierarchie, in der übergeordnete Klassen ihre Eigenschaften, nämlich die Attribute und Methoden, an ihre untergeordneten Klassen weitergeben. Diese Weitergabe der Eigenschaften heißt Vererbung. Soll eine Software Sach- und Finanzkonten verwenden, werden diejenigen Attribute und Methoden, die für beide Klassen – Sachkonto und Finanzkonto – benötigt werden, in der übergeordneten Klasse Konto definiert. Objektinstanzen beider Klassen können bei der Ausführung der Software auf diese Definitionen zurückgreifen.</p>
+<p>Nur die Funktionen und Datenfelder der spezialisierten Klasse definiert der Entwickler in den untergeordneten Klassen. Bei der Softwareentwicklung werden allgemein gültige Attribute und Methoden, die von Objektinstanzen aller Klassen verwendet werden, zu in der Hierarchie möglichst hoch angesiedelten Klassen zugeordnet. Dadurch greifen die Objektinstanzen beliebig vieler untergeordneter Klassen auf die Klassendefinition einer übergeordneten Klasse zurück, was den Implementierungsaufwand im Vergleich zur herkömmlichen Programmierung deutlich reduzieren kann.</p>
+<p><em>Quelle: Schwarzer, B. &amp; Krcmar, H. (2014). Wirtschaftsinformatik. Grundlagen betrieblicher Informationssysteme (5. Aufl.) Stuttgart: Schäffer-Poeschel.</em></p>
+<hr />
+<h2 id="arbeitsauftrag-a21-funktionalitat-und-datenhaltung-in-klassen-und-objekten">Arbeitsauftrag A|2.1: Funktionalität und Datenhaltung in Klassen und Objekten</h2>
+<p>Lösen Sie die folgenden Aufgaben über das Informationsmaterial im Kurs:</p>
+<ol>
+<li>Wie sieht die graphische Darstellung einer einzelnen Klasse gemäß eines UML-Klassendiagramms aus? Beschreiben Sie diese in eigenen Worten.</li>
+<li>Verdeutlichen Sie, wo Methoden (also die Funktionalität) einer Klasse definiert werden.</li>
+<li>Verdeutlichen Sie auch, wo die Daten (im Sinne der Programmvariablen) einer Klasse definiert werden.</li>
+</ol>
+<hr />
+<h2 id="informationsmaterial-m21-uml-klassendiagramm">Informationsmaterial M|2.1: UML-Klassendiagramm</h2>
+<p>Für die Analyse und das Design von Softwaresystemen ist das Klassendiagramm das wichtigste Diagramm. Hier werden Klassen und deren Beziehungen untereinander statisch dargestellt. Eine Klasse besteht aus drei wesentlichen Teilen: dem Klassennamen, den Methoden und den Attributen:</p>
+<p><img alt="UML Klasse" src="bilder/kap_02_UML_Klasse_Kunde.png" /></p>
+<p>Attribute haben unterschiedliche Sichtbarkeiten. Sie können privat oder öffentlich sein. Dazu bietet das Klassendiagramm folgende Symbolik:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Symbol</th>
+<th align="left">Bedeutung</th>
+<th align="left">Sichtbarkeit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>-</code></td>
+<td align="left">privates Attribute (private)</td>
+<td align="left">Ist gegen den Zugriff von außen geschützt und kann nur über entsprechende Methoden angesprochen werden.</td>
+</tr>
+<tr>
+<td align="center"><code>+</code></td>
+<td align="left">öffentliches Attribut (public)</td>
+<td align="left">Kann direkt angesprochen werden und wird nur selten verwendet.</td>
+</tr>
+<tr>
+<td align="center"><code>#</code></td>
+<td align="left">geschütztes Attribut – spielt bei der Vererbung eine Rolle (protected)</td>
+<td align="left">Verhält sich nach außen wie ein privates Attribut. Innerhalb der Vererbungshierarchie aber wie ein öffentliches. Eine Klasse, die von einer anderen erbt, kann auf deren geschützte Attribute zugreifen als wäre es ihre eigenen.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="kompetenz-21-grundlagen-und-vorteile-der-datenbanken-erkennen">Kompetenz 2.1: Grundlagen und Vorteile der Datenbanken erkennen</h2>
+<p>Die Planung der zu programmierenden Anwendung wird über Objekte und damit abstrakter in Klassen in Form eines UML-Diagramms geplant. Die Funktionalität und die Datenhaltung werden in einer Klasse zwar vereint, aber der Fokus soll fürs Erste gemäß der Vereinbarung zwischen Matthias Thale und Thilo Ostiem auf die Daten gelegt werden.</p>
+<p>Eine gute Datenhaltung als Basis für eine Anwendung in der Tabellenkalkulation weiterzuführen scheint wenig sinnvoll. Herr Ostiem hat bereits mehrfach Fehler festgestellt, die sich eingeschlichen haben. Eine Datenbank soll in der neuen Anwendung zur Verwaltung der Daten aufgebaut werden. Dies hat Herr Ostiem noch nie gemacht. Was ist eigentlich eine Datenbank?</p>
+<p><img alt="Coding Laptop" src="bilder/kap_02_handlungssit_coding.jpg" /></p>
+<hr />
+<h2 id="arbeitsauftrag-a22-was-ist-eine-datenbank">Arbeitsauftrag A|2.2: Was ist eine Datenbank?</h2>
+<p>Beschreiben Sie in eigenen Worten die Funktion einer Datenbank. Nennen Sie dabei auch die Vorteile, die sich durch die Nutzung von elektronischen Datenbanken ergeben.</p>
+<hr />
+<h2 id="informationsmaterial-m22-aufbau-einer-relationalen-datenbank">Informationsmaterial M|2.2: Aufbau einer relationalen Datenbank</h2>
+<p>Einsatzgebiete von Datenbanken
+Eine Datenbank, auch bezeichnet als Datenbanksystem, ist ein System zur elektronischen Speicherung und Verwaltung von Daten. Die Hauptaufgabe einer Datenbank ist es, große Mengen an Informationen (Daten) möglichst effizient und dauerhaft bzw. sicher zu speichern. Anwender können sich gespeicherte Informationen aus einer Datenbank anzeigen lassen.</p>
+<p>Ein Datenbanksystem besteht aus drei Komponenten:</p>
+<p><img alt="3 Tier Modell" src="bilder/kap_02_3_tier.JPG" /></p>
+<p>Die Abbildung zeigt die sogenannte 3-Schichten-Technologie: Die Struktur von ERP-Systemen basiert ebenfalls auf der Grundstruktur der 3-Schichten-Technologie.</p>
+<p>Zum einen wird eine Verwaltungssoftware (Datenbankmanagementsystem) benötigt. Diese greift zum anderen auf die zu verwaltenden Daten an sich, also die Datenbank im engeren Sinn, zu. Die Funktion der Verwaltungssoftware besteht in der Organisation bzw. strukturierten Speicherung der Daten. Sie kontrolliert z.B. die Zugriffe (Daten lesen und schreiben) auf die Datenbank.</p>
+<p>Datenbanken werden in nahezu allen Bereichen der elektronischen Datenverarbeitung genutzt. In Unternehmen finden Datenbanken z.B. Anwendung bei der Erfassung und Auswertung von Kundendaten, Lieferanten, Artikel usw. Dabei greifen verschiedene Anwendungen über das Datenbankmanagementsystem auf die Datenbank zu. Die erfassten Daten werden in Tabellenform gespeichert.</p>
+<p>Auch hinter vielen Websites stehen umfangreiche Datenbanken. Bei Nutzung von Social-Networks werden z.B. persönliche Angaben, Beiträge und Fotos in großen Datenbanken gespeichert und Personen bzw. Personengruppen zugeordnet.</p>
+<h3 id="vorteile-von-datenbanken-sind-unter-anderem">Vorteile von Datenbanken sind unter anderem:</h3>
+<ul>
+<li>Effizienz: Daten werden nur einmalig erfasst. Die gespeicherten Informationen sind für alle Anwendungen und Einsatzgebiete im Unternehmen verfügbar, auch über Unternehmensgrenzen hinweg. Das spart Zeit und Personalkosten in Hinblick auf die Datenpflege. Datenkorrekturen müssen nur einmal erfasst werden und stehen sofort für alle zur Verfügung. Es treten weniger Fehlerquellen durch mehrfache Datenpflege auf. Alle Daten können bei Bedarf von einer großen Mitarbeiterzahl genutzt werden. Dabei regeln Steuerungen im Datenbankmanagementsystem, dass ein Datensatz nicht von mehreren Personen gleichzeitig bearbeitet werden kann. Während ein Mitarbeiter einen Datensatz bearbeitet, ist dieser für alle anderen zur Bearbeitung gesperrt.</li>
+<li>Verwaltung von großen Datenmengen: Daten können über einen unbegrenzten Zeitraum in einer unbegrenzten Menge gehalten (gespeichert) und wieder zur Verfügung gestellt werden. Gerade große Unternehmen speichern riesige Mengen an Daten. Sehr große Datenmengen können in Auswertungen mit einbezogen werden z.B. für Analysen und daraus folgende Prognosen.</li>
+</ul>
+<h3 id="verbreitete-datenbankprogramme">Verbreitete Datenbankprogramme</h3>
+<p>Es gibt eine Vielzahl von verschiedenen Datenbanken. "Global Player" sind hierbei die Datenbanken der Firmen Oracle und IBM. Als kostenlose Open-Source-Alternative ist die Datenbank MySQL zu nennen, welche wir im weiteren Verlauf dieses Kurses nutzen werden. Von der Firma Microsoft wird das Programm Access angeboten. Dieses ermöglicht einerseits graphische Darstellungen und Verwaltung von Datenbanken, als auch eine SQL-Eingabe.</p>
+<hr />
+<h2 id="arbeitsauftrag-a23-einsatzgebiete-fur-datenbanken">Arbeitsauftrag A|2.3: Einsatzgebiete für Datenbanken</h2>
+<p>Zählen Sie auf, in welchen Abteilungen eines Unternehmens Datenbanken sinnvolle Unterstützung bieten oder wo Sie im Alltag Datenbanken begegnen. Nennen Sie jeweils ein Beispiel und begründen Sie Ihre Wahl.</p>
+<hr />
+<h2 id="arbeitsauftrag-a24-grundlagen-zu-datenbanken">Arbeitsauftrag A|2.4: Grundlagen zu Datenbanken</h2>
+<p>Beantworten Sie die folgenden Fragen:</p>
+<ol>
+<li>Beschreiben Sie den Begriff "relationale Datenbank".</li>
+<li>Erklären Sie, warum es sinnvoll ist, Tabellen miteinander zu verknüpfen.</li>
+<li>Nennen Sie Vorteile einer Datenbank gegenüber einem Karteikartensystem.</li>
+<li>Zählen Sie auf, welche Grundsätze Unternehmen bei der Verarbeitung von personenbezogenen Daten in Bezug auf den Datenschutz berücksichtigen müssen.</li>
+</ol>
+<hr />
+<p>// TODO Informationsmaterial M|2.3: Relationale Datenbanken - Übersicht</p>
+<hr />
+<h2 id="informationsmaterial-m24-grundregeln-von-datenbanken">Informationsmaterial M|2.4: Grundregeln von Datenbanken</h2>
+<h3 id="keine-redundanzen">Keine Redundanzen</h3>
+<p>Ein Vorteil und eine weitere Voraussetzung für eine relationale Datenbank ist, dass keine Datenredundanzen auftreten dürfen: Es werden keine Daten mehrfach gespeichert. In dem obigen Beispiel werden daher in der Tabelle Artikelbezug keine Adressen der Lieferer gespeichert, sondern lediglich per Lieferer-Nr. auf die Stammdatenliste verwiesen.</p>
+<h3 id="eindeutigkeit-von-datensatzen-durch-schlusselattribute">Eindeutigkeit von Datensätzen durch Schlüsselattribute</h3>
+<p>Damit es nicht zu Fehlern oder Verwechslungen in der Tabelle kommt, erhält jeder Datensatz einen Primärschlüssel. Durch die Vergabe eines Primärschlüssels ist jeder Datensatz eindeutig identifizierbar. Ein Schlüssel darf sich nie ändern. In der vorigen Tabelle dient die Lieferer-Nr. als Primärschlüssel der Datensätze für die Tabelle Hauptlieferer.</p>
+<p>Falls die Primärschlüssel der Lieferanten nachträglich verändert werden, könnten die Datensätze aus der Tabelle "Hauptlieferer" nicht mehr den Datensätzen der Tabelle "Artikelbezug" zugeordnet werden. Die Folge wäre eine "Inkonsistenz" in der Datenbank.</p>
+<h3 id="keine-prozessdaten">Keine Prozessdaten</h3>
+<p>Eine Tabelle darf nur Grunddaten enthalten (Entitäten). Daten, die sich aus Grunddaten zusammensetzen oder errechnen lassen, müssen vermieden werden, damit es nicht zu Widersprüchen kommen kann.</p>
+<p>Beispiel: Das Alter einer Person darf nicht in einer Datenbank aufgenommen werden, da dieses sich ständig ändert. Stattdessen wird das Geburtsdatum erfasst, da mit diesem stets das aktuelle Alter errechnet werden kann.</p>
+<hr />
+<h2 id="kompetenz-22-datenbank-lebenszyklus-berucksichtigen">Kompetenz 2.2: Datenbank-Lebenszyklus berücksichtigen</h2>
+<p>Die Datenhaltung in dem herkömmlichen Dateisystem mithilfe von Tabellenkalkulationen haben gegenüber einer Datenbank verschiedene Nachteile und bringen oftmals Probleme mit sich. Da Matthias Thale sich nun mit der Sicherung der Daten beschäftigt hat, fallen Ihm einige Probleme auf, die mit der bisherigen Datenhaltung aufkommen.</p>
+<p>Bei der Analyse der Situation und der Auseinandersetzung mit dem Speichern von Daten können verschiedene Probleme identifiziert werden. Mit diesen sollen Sie sich nun auseinandersetzen. Außerdem ist Matthias Thale der genaue Ablauf zur Erstellung und Wartung einer Datenbank unbekannt, weshalb eine Darstellung erarbeitet werden soll.</p>
+<p><img alt="Glühbirne" src="bilder/kap_02_handlungssit_gluehbirne.jpg" /></p>
+<hr />
+<h2 id="arbeitsauftrag-a25-datenbank-lebenszyklus">Arbeitsauftrag A|2.5: Datenbank-Lebenszyklus</h2>
+<p>Erstellen Sie ein Schaubild zum Datenbank-Lebenszyklus, damit dieses für Matthias Thale einen groben Ablaufplan abbildet. Nutzen Sie hierfür das Informationsmaterial im Kurs.</p>
+<hr />
+<h2 id="informationsmaterial-m25-datenbank-lebenszyklus">Informationsmaterial M|2.5: Datenbank-Lebenszyklus</h2>
+<p>Bei der Entwicklung und dem Einsatz von Software werden die verschiedenen Phasen wie z.B. Analyse, Planung, Entwicklung, Test und Anwendung von Software unterschieden und unter dem Begriff des Software-Lebenszyklus zusammengefasst. Diese Einteilung in Entwicklungsphasen kann ebenfalls auf dem Gebiet der Datenbanken angewendet werden.</p>
+<p>Die Analyse der Anforderungen grenzt die Inhalte der neuen Datenbank ein und dient der Festlegung der Benutzergruppen und Anwendungen. Dabei werden die Datenobjekte, deren Eigenschaften und Beziehungen sowie mögliche Vorgänge (Aktualisierungen, Abfragen) und Randbedingungen ermittelt. Das Resultat der Anforderungsanalyse ist die Anforderungsspezifikation.</p>
+<p>Der konzeptionelle Entwurf umfasst die Modellierung der Sichten und die Integration der Sichten in ein Gesamtschema. Dafür werden meist Entity-Relationship-Diagramme erstellt. Auf diesem Gebiet werden aber auch UML-Diagramme eingesetzt (UML = Unified Modeling Language).</p>
+<p>Diese grafischen Darstellungen werden in der Phase des logischen Entwurfs in das Datenmodell des Ziel DBS (z,B. in das relationale Datenmodell) transformiert und die gesamte Datenbank wird so aufbereitet, dass eine effektive Speicherung möglich ist (das Datenbankschema wird normalisiert).</p>
+<p>Bei verteilten Datenbanken ist ein Entwurf für die Verteilung der Datenbanken im Netz erforderlich.</p>
+<p>Nun kann die Datenbank mithilfe der Sprachmittel des DBMS erstellt und die benötigten Anfragen können formuliert werden, was als physischer Entwurf bzw. Implementierung bezeichnet wird. Für relationale DBS geschieht dies in der Abfragesprache SQL. Im Falle einer Übernahme von Daten aus alten Datenbanken oder Dateiinhalten erfolgt an dieser Stelle eine Konvertierung dieser Daten in das neue Format.</p>
+<p>Die Datenbank und die erstellten Abfragen werden nun getestet und die Ergebnisse werden auf ihre Gültigkeit bezüglich der Anforderungen geprüft (validiert). So wir die Sicherung der Datenbank-Qualität gewährleistet.</p>
+<p>In der Phase der Anwendung muss die Datenbank ständig gewartet werden. Im Laufe dieser Zeit können sich Änderungen des Datenbankschemas ergeben. In diesem Fall ist eine Reorganisation der Datenbank notwendig.</p>
+<div class="admonition note">
+<p class="admonition-title">Zusätzliches Material, weitere Übungen &amp; Tipps</p>
+<p>Die folgenden Übungen und Tipps &amp; Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br><em>Ich kann, weil ich will, was ich muss! (Immanuel Kant)</em></p>
+</div>
+<h2 id="ubungen">Übungen</h2>
+<p>// TODO Links einfügen</p>
+<h2 id="zusatzmaterial">Zusatzmaterial</h2>
+<p>// TODO Links einfügen</p>
+<!-- BEGIN INCLUDE inhalte/lizenzhinweis.md '&lt;!--include-start--&gt;' '&lt;!--include-end--&gt;' -->
+
+<div class="admonition info">
+<p class="admonition-title">Lizenz</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Der PV-DB-Kurs</span> von <a xmlns:cc="http://creativecommons.org/ns#" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/" property="cc:attributionName" rel="cc:attributionURL"> Oliver Schwenke &amp; André Neumann</a> ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Fragen, Hinweise etc. an neumann@mmbbs.de.</p>
+</div>
+<!-- END INCLUDE -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ce72ebac.min.js"></script>
+      
+    
+  </body>
+</html>

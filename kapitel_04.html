@@ -1,0 +1,769 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/kapitel_04.html">
+      
+      
+        <link rel="prev" href="kapitel_03.html">
+      
+      
+        <link rel="next" href="kapitel_05.html">
+      
+      <link rel="icon" href="bilder/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+    
+    
+      
+        <title>Kapitel 04 - Entwurf von Datenbanken für MySQL - KIT Prüfungsvorbereitung Datenbanken</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kapitel-4-entwurf-von-datenbanken-fur-mysql" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-header__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KIT Prüfungsvorbereitung Datenbanken
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kapitel 04 - Entwurf von Datenbanken für MySQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="KIT Prüfungsvorbereitung Datenbanken" class="md-nav__button md-logo" aria-label="KIT Prüfungsvorbereitung Datenbanken" data-md-component="logo">
+      
+  <img src="bilder/logo.png" alt="logo">
+
+    </a>
+    KIT Prüfungsvorbereitung Datenbanken
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/herr-nm/MMBbS_KIT_PVDB" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Informationen zum Kurs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_01.html" class="md-nav__link">
+        Kapitel 01 - Modellunternehmen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_02.html" class="md-nav__link">
+        Kapitel 02 - Grundlagen Datenhaltung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_03.html" class="md-nav__link">
+        Kapitel 03 - Entwurf von Datenbanken & Normalisierung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kapitel 04 - Entwurf von Datenbanken für MySQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="kapitel_04.html" class="md-nav__link md-nav__link--active">
+        Kapitel 04 - Entwurf von Datenbanken für MySQL
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-40-normalisierte-datenbanken-planen" class="md-nav__link">
+    Kompetenz 4.0: Normalisierte Datenbanken planen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 4.0: Normalisierte Datenbanken planen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a40-erm-universitat-erstellen" class="md-nav__link">
+    Arbeitsauftrag A|4.0: ERM Universität erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a41-erm-der-datenbank-zur-bse-plattform" class="md-nav__link">
+    Arbeitsauftrag A|4.1: ERM der Datenbank zur BSE-Plattform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a42-kurzschreibweise-der-datenbank-zur-bse-plattform" class="md-nav__link">
+    Arbeitsauftrag A|4.2: Kurzschreibweise der Datenbank zur BSE-Plattform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue40-erm-kaufvorgang-erstellen" class="md-nav__link">
+    Übung UE|4.0: ERM Kaufvorgang erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue41-erm-autovermietung-erstellen" class="md-nav__link">
+    Übung UE|4.1: ERM Autovermietung erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue42-erm-schulungsunternehmen-erstellen" class="md-nav__link">
+    Übung UE|4.2: ERM Schulungsunternehmen erstellen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übung UE|4.2: ERM Schulungsunternehmen erstellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue43-erm-lieferungen-erstellen" class="md-nav__link">
+    Übung UE|4.3: ERM Lieferungen erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue44-erm-vermietung-erstellen" class="md-nav__link">
+    Übung UE|4.4: ERM Vermietung erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue45-erm-computernetzwerk-erstellen" class="md-nav__link">
+    Übung UE|4.5: ERM Computernetzwerk erstellen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_05.html" class="md-nav__link">
+        Kapitel 05 - Realisierung einer Datenbank mit MySQL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kapitel_06.html" class="md-nav__link">
+        Kapitel 06 - MySQL - Einfache Datenabfragen mit SELECT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kompetenz-40-normalisierte-datenbanken-planen" class="md-nav__link">
+    Kompetenz 4.0: Normalisierte Datenbanken planen
+  </a>
+  
+    <nav class="md-nav" aria-label="Kompetenz 4.0: Normalisierte Datenbanken planen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a40-erm-universitat-erstellen" class="md-nav__link">
+    Arbeitsauftrag A|4.0: ERM Universität erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a41-erm-der-datenbank-zur-bse-plattform" class="md-nav__link">
+    Arbeitsauftrag A|4.1: ERM der Datenbank zur BSE-Plattform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbeitsauftrag-a42-kurzschreibweise-der-datenbank-zur-bse-plattform" class="md-nav__link">
+    Arbeitsauftrag A|4.2: Kurzschreibweise der Datenbank zur BSE-Plattform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubungen" class="md-nav__link">
+    Übungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue40-erm-kaufvorgang-erstellen" class="md-nav__link">
+    Übung UE|4.0: ERM Kaufvorgang erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue41-erm-autovermietung-erstellen" class="md-nav__link">
+    Übung UE|4.1: ERM Autovermietung erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue42-erm-schulungsunternehmen-erstellen" class="md-nav__link">
+    Übung UE|4.2: ERM Schulungsunternehmen erstellen
+  </a>
+  
+    <nav class="md-nav" aria-label="Übung UE|4.2: ERM Schulungsunternehmen erstellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue43-erm-lieferungen-erstellen" class="md-nav__link">
+    Übung UE|4.3: ERM Lieferungen erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue44-erm-vermietung-erstellen" class="md-nav__link">
+    Übung UE|4.4: ERM Vermietung erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubung-ue45-erm-computernetzwerk-erstellen" class="md-nav__link">
+    Übung UE|4.5: ERM Computernetzwerk erstellen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusatzmaterial" class="md-nav__link">
+    Zusatzmaterial
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kapitel-4-entwurf-von-datenbanken-fur-mysql">Kapitel 4: Entwurf von Datenbanken für MySQL</h1>
+<p><img alt="Kapitelbild" src="bilder/kap_04_kapitelbild.png" /></p>
+<p>In diesem Kapitel ...</p>
+<ul>
+<li>... erstellen Sie verschiedene ERM.</li>
+<li>... berücksichtigen Sie die Normalisierung in der Datenbankplanung.</li>
+</ul>
+<hr />
+<h2 id="kompetenz-40-normalisierte-datenbanken-planen">Kompetenz 4.0: Normalisierte Datenbanken planen</h2>
+<p>Bis die Datenbank der BSE GmbH erstellt werden kann, müssen noch Informationen eingeholt werden. Dazu wurde eine Besprechung angesetzt. In der Zwischenzeit sollen für andere Kundenaufträge erste Datenbankvorlagen erstellt werden.</p>
+<p><img alt="Gebäude" src="bilder/kap_04_handlungssit_gebaeude.jpg" /></p>
+<hr />
+<h3 id="arbeitsauftrag-a40-erm-universitat-erstellen">Arbeitsauftrag A|4.0: ERM Universität erstellen</h3>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Universität</p>
+<p>Studenten besuchen Vorlesungen, die von einem Professor geführt werden. Für die Vorlesungen werden Bücher benötigt.</p>
+</div>
+<hr />
+<h3 id="arbeitsauftrag-a41-erm-der-datenbank-zur-bse-plattform">Arbeitsauftrag A|4.1: ERM der Datenbank zur BSE-Plattform</h3>
+<ol>
+<li>Lesen Sie sich das Protokoll (s. Informationsmaterial im Kurs) aus der Besprechung der Geschäftsführung durch.</li>
+<li>Markieren Sie in unterschiedlichen Farben mögliche Entitäten und Attribute für ein Entity-
+Relationship-Modell (ERM).</li>
+<li>
+<p>Zeichnen Sie ein ERM für die Verkaufsplattform und berücksichtigen Sie für alle folgenden Aufgaben diese Konventionen:</p>
+</li>
+<li>
+<p>Der Datenbankname soll <code>db_bseverkauf</code> lauten.</p>
+</li>
+<li>Die Tabellennamen beginnen mit <code>tbl_</code> und bilden die Entitäten im Singular ab: bspw. für eine Sammlung an Blumen würde die Tabelle <code>tbl_blume</code> heißen.</li>
+<li>Die Primärschlüsselattribute enden auf <code>PK</code>, die Fremdschlüsselattribute auf <code>FK</code>.</li>
+<li>Beziehungen sollen inklusive der Kardinalitäten eingezeichnet werden.</li>
+<li>Die Nutzung von Umlauten und Sonderzeichen in Entitäten und Attributen ist zur Fehlervermeidung verboten.</li>
+</ol>
+<hr />
+<h3 id="arbeitsauftrag-a42-kurzschreibweise-der-datenbank-zur-bse-plattform">Arbeitsauftrag A|4.2: Kurzschreibweise der Datenbank zur BSE-Plattform</h3>
+<p>Erstellen Sie die Kurzschreibweise zu dem ERM der BSE GmbH &amp; Co. KG auf Basis der besprochenen Ergebnisse.</p>
+<div class="admonition note">
+<p class="admonition-title">Zusätzliches Material, weitere Übungen &amp; Tipps</p>
+<p>Die folgenden Übungen und Tipps &amp; Tricks dienen Ihrer persönlichen Wiederholung und Vorbereitung auf Klassenarbeiten, Prüfungen etc.<br><br><em>Ich kann, weil ich will, was ich muss! (Immanuel Kant)</em></p>
+</div>
+<h2 id="ubungen">Übungen</h2>
+<h3 id="ubung-ue40-erm-kaufvorgang-erstellen">Übung UE|4.0: ERM Kaufvorgang erstellen</h3>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Kaufvorgang</p>
+<p>Kunden haben Warenkörbe. In den Warenkörben liegen Artikel.</p>
+</div>
+<hr />
+<h3 id="ubung-ue41-erm-autovermietung-erstellen">Übung UE|4.1: ERM Autovermietung erstellen</h3>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Autovermietung</p>
+<p>Kunden können Autos mieten. Ein Auto gehört zu einer Marke und die Marke hat verschiedene Modelle.</p>
+</div>
+<hr />
+<h3 id="ubung-ue42-erm-schulungsunternehmen-erstellen">Übung UE|4.2: ERM Schulungsunternehmen erstellen</h3>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Schulungsunternehmen</p>
+<p>Das Schulungsunternehmen MeisterMedia bietet Kurse an, die von Referenten geleitet werden (Teamteaching ist möglich). Kurse können sich über mehrere Tage erstrecken und werden pro Tag abgerechnet. Für die Kurse muss jeweils ein Raum zur Verfügung gestellt werden. Einige Referenten sind fest angestellt, andere sind auf selbstständiger Basis für das Unternehmen tätig.</p>
+</div>
+<hr />
+<h4 id="ubung-ue43-erm-lieferungen-erstellen">Übung UE|4.3: ERM Lieferungen erstellen</h4>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Lieferungen</p>
+<p>Ein Lieferant hat einen Vor- und Nachnamen und eine Anschrift (PLZ, Ort, Straße). Ein Lieferant liefert mehrere Artikel. Ein Artikel hat eine Bezeichnung und ist in einer bestimmten Menge vorhanden. Ein Artikel wird von mehreren Lieferanten geliefert. Ein bestimmter Artikel kann von einem bestimmten Lieferanten an verschiedenen Tagen wiederholt geliefert werden, in diesem Zusammenhang ist das Lieferdatum wichtig. Des weiteren interessiert dabei der Lieferpreis und die Lieferzeit. In einem Lager werden mehrere Artikel gelagert. Ein Lager hat eine Standortbezeichnung. Ein Artikel wird in einem Lager aufbewahrt.</p>
+</div>
+<hr />
+<h4 id="ubung-ue44-erm-vermietung-erstellen">Übung UE|4.4: ERM Vermietung erstellen</h4>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Vermietung</p>
+<p>Es gibt Mieter (mit Namen, Vornamen, Geburtsdatum, Einkommen, usw.) und Eigentümer (ebenfalls mit Namen, Vornamen, Geburtsdatum, Einkommen, usw.). Mieter mieten Wohnungen an. Wobei ein Mieter viele Wohnungen anmieten darf, aber eine Wohnung nur einem Mieter zugeordnet wird (Untermiete oder Gemeinschaftswohnungen sind ausgeschlossen). Eine Wohnung gehört einem Eigentümer, der natürlich auch mehrere Wohnungen besitzen kann. Eine Wohnung hat eine Anzahl von Zimmern, eine Größe in m² und wenn sie vermietet wird einen Mietpreis. Eine oder mehrere Wohnungen liegen in genau einem Gebäude. Ein Gebäude steht in einer Straße und hat Eigenschaften wie Hausnummer, Anzahl Wohnungen und Baujahr. Eine Straße liegt in einer Gemeinde und hat Eigenschaften wie Name, Art und Zustand. Eine Gemeinde wiederum hat Eigenschaften wie Name, Einwohnerzahl und Gemeindefläche.</p>
+</div>
+<hr />
+<h4 id="ubung-ue45-erm-computernetzwerk-erstellen">Übung UE|4.5: ERM Computernetzwerk erstellen</h4>
+<p>Es soll ein ER-Modell für einen Kunden erstellt werden:</p>
+<ol>
+<li>Das ER-Modell erstellen Sie sauber auf einem Blatt Papier mit Lineal und Stift.</li>
+<li>Erstellen Sie auf Grundlage des Beispiels ein redundanzfreies ERM zur Erfassung des Problems. Berücksichtigen Sie alle notwendigen Entitäten und Beziehungen. Achten Sie auf eine saubere und konventionsgerechte Darstellung.</li>
+<li>Ergänzen Sie notwendige Beziehungsentitäten und Schlüsselattribute und kennzeichnen Sie diese. Weitere Attribute sind im ERM nicht relevant.</li>
+<li>Geben Sie für alle Entitäten das relationale Datenbankmodell in Kurzschreibweise an und ergänzen Sie hier falls notwendig die normalen Attribute.</li>
+</ol>
+<div class="admonition quote">
+<p class="admonition-title">Computernetzwerk</p>
+<p>Für das Schulnetzwerk müssen Computerteile beschafft werden. Der Systemadministrator erstellt eine Datenbank, um in Frage kommende Lieferanten schneller ermitteln zu können. Zu einem Lieferanten sind der Name der Firma, der Ansprechpartner und deren Telefonnummer sowie die Adresse mit Straße, Hausnummer, Postleitzahl und Ort relevant. Computerteile können von verschiedenen Lieferanten bezogen werden, die Lieferanten haben gewöhnlich auch mehrere Teile im Angebot. Computerteile haben eine Bezeichnung und ein Gewicht. Außerdem wird jedes Computerteil genau einer bestimmten Baugruppe, wie zum Beispiel Grafikkarte, CPU usw. zugeordnet. Einer Baugruppe können mehrere Computerteile zugeordnet sein.</p>
+</div>
+<h2 id="zusatzmaterial">Zusatzmaterial</h2>
+<p>// TODO Links einfügen</p>
+<!-- BEGIN INCLUDE inhalte/lizenzhinweis.md '&lt;!--include-start--&gt;' '&lt;!--include-end--&gt;' -->
+
+<div class="admonition info">
+<p class="admonition-title">Lizenz</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Der PV-DB-Kurs</span> von <a xmlns:cc="http://creativecommons.org/ns#" href="https://herr-nm.github.io/MMBbS_KIT_PVDB/" property="cc:attributionName" rel="cc:attributionURL"> Oliver Schwenke &amp; André Neumann</a> ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Fragen, Hinweise etc. an neumann@mmbbs.de.</p>
+</div>
+<!-- END INCLUDE -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ce72ebac.min.js"></script>
+      
+    
+  </body>
+</html>
